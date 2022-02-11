@@ -10,7 +10,7 @@ namespace JobBoard.Models
     {
         [Key]
         [Display(Name = "Location ID")]
-        public int LocationID { get; set; }
+        public string LocationID { get; set; }
         [Required]
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }

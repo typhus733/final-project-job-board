@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,15 +9,16 @@ namespace JobBoard.Models
 {
     public class Interview
     {
+        [Key]
         [Required]
         [Display(Name = "Candidate")]
-        public virtual Candidate InterviewCandidate { get; set; }
-        [Required]
-        [Display(Name = "Position")]
-        public virtual Position InterviewPosition { get; set; }
-        [Required]
-        [Display(Name = "Location")]
-        public virtual Location InterviewLocation { get; set; }
+        public string Id { get; set; }
+        //[Required]
+        //[Display(Name = "Position")]
+        //public virtual Position InterviewPosition { get; set; }
+        //[Required]
+        //[Display(Name = "Location")]
+        //public virtual Location InterviewLocation { get; set; }
         [Required]
         [Display(Name = "Start Time")]
         public virtual DateTime StartTime { get; set; }

@@ -10,7 +10,7 @@ namespace JobBoard.Models
     {
         [Key]
         [Display(Name = "Candidate ID")]
-        public int? ID { get; set; }
+        public string ID { get; set; }
 
         [Required]
         [Display(Name = "Name")]
