@@ -89,5 +89,28 @@ namespace JobBoard.Controllers
                 return ValidationProblem(e.Message);
             }
         }
+
+        [HttpDelete]
+        [Route("{locationID}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Location> DeleteLocation([FromRoute] string locationID)
+        {
+            try
+            {
+                var locationList = _context.Locations as IQueryable<Location>;
+                var location = locationList.First(p => p.LocationID.Equals(locationID));
+
+                _context.Locations.Remove(location);
+                _context.SaveChanges();
+
+                return new CreatedResult($"/locations/{location.LocationID.ToLower()}", location);
+            }
+            catch (Exception e)
+            {
+                // Typically an error log is produced here
+                return ValidationProblem(e.Message);
+            }
+        }
     }
 }
