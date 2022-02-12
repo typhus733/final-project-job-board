@@ -28,7 +28,7 @@ namespace JobBoard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<LocationContext>(opt => opt.UseLazyLoadingProxies().UseInMemoryDatabase("Locations"));
+            services.AddDbContext<JobBoardContext>(opt => opt.UseLazyLoadingProxies().UseInMemoryDatabase("JobBoard"));
             services.AddApiVersioning(opt => opt.ReportApiVersions = true);
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
             {

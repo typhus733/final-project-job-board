@@ -15,9 +15,9 @@ namespace JobBoard.Controllers
     [Produces("application/json")]
     public class LocationController : ControllerBase
     {
-        private readonly LocationContext _context;
+        private readonly JobBoardContext _context;
 
-        public LocationController(LocationContext context)
+        public LocationController(JobBoardContext context)
         {
             _context = context;
 

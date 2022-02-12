@@ -8,7 +8,7 @@ namespace JobBoard.Models
 {
     public class DataSeed
     {
-        public static void InitData(LocationContext context)
+        public static void InitData(JobBoardContext context)
         {
             Location returnLocation = new Location()
             {
@@ -36,9 +36,9 @@ namespace JobBoard.Models
 
             Interview seedInterview = new Interview()
             {
-                Id = seedCandidate.ID,
-                //InterviewPosition = seedPosition,
-                //InterviewLocation = returnLocation,
+                CandidateId = seedCandidate.ID,
+                PositionID = seedPosition.PositionID,
+                LocationID = returnLocation.LocationID,
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now
 
@@ -48,6 +48,9 @@ namespace JobBoard.Models
             returnLocation.PositionList.Add(seedPosition);
             seedPosition.PositionInterviews.Add(seedInterview);
             context.Locations.Add(returnLocation);
+            context.Positions.Add(seedPosition);
+            context.Interviews.Add(seedInterview);
+            context.Candidates.Add(seedCandidate);
 
             //context.Locations.Add(new Location
             //{
