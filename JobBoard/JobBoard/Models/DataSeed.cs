@@ -20,7 +20,7 @@ namespace JobBoard.Models
             };
             Candidate seedCandidate = new Candidate()
             {
-                ID = "567",
+                CandidateID = "567",
                 Name = "Chihuahua",
                 Phone = "8675309",
                 Email = "test@candidateemail.com"
@@ -36,7 +36,7 @@ namespace JobBoard.Models
 
             Interview seedInterview = new Interview()
             {
-                CandidateId = seedCandidate.ID,
+                CandidateId = seedCandidate.CandidateID,
                 PositionID = seedPosition.PositionID,
                 LocationID = returnLocation.LocationID,
                 StartTime = DateTime.Now,

@@ -6,23 +6,16 @@ using System.Threading.Tasks;
 
 namespace JobBoard.Models
 {
-    public class Candidate
+    public class CandidatePatch
     {
-        [Key]
-        [Display(Name = "Candidate ID")]
-        public string CandidateID { get; set; }
-
-        [Required]
+        
         [Display(Name = "Name")]
         public string Name { get; set; }
-
-        [Required]
+        
         [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 
-        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
     }
 }
