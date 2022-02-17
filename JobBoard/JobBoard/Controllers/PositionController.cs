@@ -42,5 +42,77 @@ namespace JobBoard.Controllers
                 .OrderBy(p => p.PositionID)
                 .Take(15));
         }
+
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Location> PostPosition([FromBody] Position position)
+        {
+            try
+            {
+
+                _context.Positions.Add(position);
+                _context.SaveChanges();
+
+                return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
+            }
+            catch (Exception e)
+            {
+                // Typically an error log is produced here
+                return ValidationProblem(e.Message);
+            }
+        }
+
+        [HttpPatch]
+        [Route("{positionID}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Location> PatchPosition([FromRoute] string positionID, [FromBody] PositionPatch newPosition)
+        {
+            try
+            {
+                var positionList = _context.Positions as IQueryable<Position>;
+                var position = positionList.First(p => p.PositionID.Equals(positionID));
+
+                position.Title = newPosition.Title ?? position.Title;
+                position.Description = newPosition.Description ?? position.Description;
+                position.PositionInterviews = newPosition.PositionInterviews ?? position.PositionInterviews;
+
+
+
+                _context.Positions.Update(position);
+                _context.SaveChanges();
+
+                return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
+            }
+            catch (Exception e)
+            {
+                // Typically an error log is produced here
+                return ValidationProblem(e.Message);
+            }
+        }
+        [HttpDelete]
+        [Route("{positionID}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Position> DeletePosition([FromRoute] string positionID)
+        {
+            try
+            {
+                var positionList = _context.Positions as IQueryable<Position>;
+                var position = positionList.First(p => p.PositionID.Equals(positionID));
+
+                _context.Positions.Remove(position);
+                _context.SaveChanges();
+
+                return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
+            }
+            catch (Exception e)
+            {
+                // Typically an error log is produced here
+                return ValidationProblem(e.Message);
+            }
+        }
     }
 }
