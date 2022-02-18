@@ -120,12 +120,12 @@ namespace JobBoard.Controllers
         [Route("{interviewID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Interview> DeleteInterview([FromRoute] string interviewId)
+        public ActionResult<Interview> DeleteInterview([FromRoute] string interviewID)
         {
             try
             {
                 var interviewList = _context.Interviews as IQueryable<Interview>;
-                var interview = interviewList.First(p => p.InterviewID.Equals(interviewId));
+                var interview = interviewList.First(p => p.InterviewID.Equals(interviewID));
 
                 _context.Interviews.Remove(interview);
                 _context.SaveChanges();
