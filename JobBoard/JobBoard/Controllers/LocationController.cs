@@ -64,7 +64,7 @@ namespace JobBoard.Controllers
         }
         
         [HttpPatch]
-        [Route("{locationId}")]
+        [Route("{locationID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Location> PatchLocation([FromRoute] string locationId, [FromBody] LocationPatch newLocation)
@@ -99,6 +99,25 @@ namespace JobBoard.Controllers
             {
                 var locationList = _context.Locations as IQueryable<Location>;
                 var location = locationList.First(p => p.LocationID.Equals(locationID));
+                var positionList = _context.Positions as IQueryable<Position>;
+                var interviewList = _context.Interviews as IQueryable<Interview>;
+                
+
+                foreach (Position p in positionList)
+                {
+                    if (p.LocationID == locationID)
+                    {
+                        _context.Positions.Remove(p);
+                    }
+                }
+                foreach (Interview i in interviewList)
+                {
+                    if (i.LocationID == locationID)
+                    {
+                        _context.Interviews.Remove(i);
+                    }
+                }
+                
 
                 _context.Locations.Remove(location);
                 _context.SaveChanges();

@@ -65,21 +65,21 @@ namespace JobBoard.Controllers
         }
 
         [HttpPatch]
-        [Route("{interviewId}")]
+        [Route("{interviewID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Location> PatchInterview([FromRoute] string interviewId, [FromBody] InterviewPatch newInterview)
+        public ActionResult<Interview> PatchInterview([FromRoute] string interviewID, [FromBody] InterviewPatch newInterview)
         {
             try
             {
                 var interviewList = _context.Interviews as IQueryable<Interview>;
-                var interview = interviewList.First(p => p.InterviewID.Equals(interviewId));
+                var interview = interviewList.First(p => p.InterviewID.Equals(interviewID));
 
-                interview.CandidateID = newInterview.CandidateId ?? interview.CandidateID;
+                interview.CandidateID = newInterview.CandidateID ?? interview.CandidateID;
                 interview.PositionID = newInterview.PositionID ?? interview.PositionID;
                 interview.LocationID = newInterview.LocationID ?? interview.LocationID;
-
-
+                interview.StartTime = newInterview.StartTime ?? interview.StartTime;
+                interview.EndTime = newInterview.EndTime ?? interview.EndTime;
 
                 _context.Interviews.Update(interview);
                 _context.SaveChanges();
@@ -94,7 +94,7 @@ namespace JobBoard.Controllers
         }
 
         [HttpDelete]
-        [Route("{interviewId}")]
+        [Route("{interviewID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Interview> DeleteInterview([FromRoute] string interviewId)

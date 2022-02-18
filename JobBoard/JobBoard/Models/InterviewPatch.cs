@@ -10,7 +10,7 @@ namespace JobBoard.Models
     public class InterviewPatch
     {
         [Display(Name = "Candidate")]
-        public string CandidateId { get; set; }
+        public string CandidateID { get; set; }
         
         [Display(Name = "Position")]
         public string PositionID { get; set; }
@@ -20,10 +20,10 @@ namespace JobBoard.Models
 
         //Update datetime to take specific time
         [Display(Name = "Start Time")]
-        public virtual DateTime StartTime { get; set; }
+        public virtual DateTime? StartTime { get; set; }
         
         [Display(Name = "End Time")]
-        public virtual DateTime EndTime { get; set; }
+        public virtual DateTime? EndTime { get; set; }
 
     }
 }
