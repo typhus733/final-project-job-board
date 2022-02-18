@@ -77,9 +77,6 @@ namespace JobBoard.Controllers
 
                 position.Title = newPosition.Title ?? position.Title;
                 position.Description = newPosition.Description ?? position.Description;
-                position.PositionInterviews = newPosition.PositionInterviews ?? position.PositionInterviews;
-
-
 
                 _context.Positions.Update(position);
                 _context.SaveChanges();
@@ -92,6 +89,7 @@ namespace JobBoard.Controllers
                 return ValidationProblem(e.Message);
             }
         }
+        
         [HttpDelete]
         [Route("{positionID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]

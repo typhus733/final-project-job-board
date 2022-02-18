@@ -11,10 +11,6 @@ namespace JobBoard.Models
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }       
         [Display(Name = "Address")]
-        public string Address { get; set; }
-        [Display(Name = "Position List")]
-        public virtual List<Position> PositionList { get; set; }
-        [Display(Name = "Interview List")]
-        public virtual List<Interview> InterviewList { get; set; }
+        public string Address { get; set; }         
     }
 }

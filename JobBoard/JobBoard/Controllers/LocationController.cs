@@ -42,6 +42,7 @@ namespace JobBoard.Controllers
                 .OrderBy(p => p.LocationID)
                 .Take(15));
         }
+        
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -61,6 +62,7 @@ namespace JobBoard.Controllers
                 return ValidationProblem(e.Message);
             }
         }
+        
         [HttpPatch]
         [Route("{locationId}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -73,10 +75,7 @@ namespace JobBoard.Controllers
                 var location = locationList.First(p => p.LocationID.Equals(locationId));
 
                 location.CompanyName = newLocation.CompanyName ?? location.CompanyName;
-                location.Address = newLocation.Address ?? location.Address;
-                location.PositionList = newLocation.PositionList ?? location.PositionList;
-                location.InterviewList = newLocation.InterviewList ?? location.InterviewList;
-               
+                location.Address = newLocation.Address ?? location.Address;              
 
                 _context.Locations.Update(location);
                 _context.SaveChanges();
@@ -89,7 +88,7 @@ namespace JobBoard.Controllers
                 return ValidationProblem(e.Message);
             }
         }
-
+        //Update location delete to delete all locations tied to location
         [HttpDelete]
         [Route("{locationID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]

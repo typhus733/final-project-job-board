@@ -17,9 +17,8 @@ namespace JobBoard.Models
         [Required]
         [Display(Name = "Description")]
         public string Description { get; set; }
-
-        [Display(Name = "Interview List")]
-        public virtual List<Interview> PositionInterviews { get; set; }
-
+        [Required]
+        [Display(Name = "Location ID")]
+        public string LocationID { get; set; }   
     }
 }

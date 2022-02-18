@@ -7,24 +7,19 @@ using System.Threading.Tasks;
 
 namespace JobBoard.Models
 {
-    public class Interview
+    public class InterviewPatch
     {
         [Key]
         [Required]
-        [Display(Name = "Interview ID")]
-        public string InterviewID { get; set; }
+        [Display(Name = "Candidate")]
+        public string CandidateId { get; set; }
         [Required]
         [Display(Name = "Position")]
         public string PositionID { get; set; }
         [Required]
         [Display(Name = "Location")]
         public string LocationID { get; set; }
-        [Required]
-        [Display(Name = "Candidate")]
-        public string CandidateID { get; set; }
-        public string CandidateId { get; internal set; }
 
-        //Update datetime for taking time in
         [Required]
         [Display(Name = "Start Time")]
         public virtual DateTime StartTime { get; set; }

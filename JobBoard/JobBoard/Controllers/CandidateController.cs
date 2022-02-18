@@ -89,6 +89,7 @@ namespace JobBoard.Controllers
                 return ValidationProblem(e.Message);
             }
         }
+        
         [HttpDelete]
         [Route("{candidateID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
