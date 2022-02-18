@@ -26,13 +26,36 @@ namespace JobBoard.Controllers
             DataSeed.InitData(context);
         }
 
-        
         [HttpGet]
         [Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IQueryable<Interview>> GetInterview([FromQuery] string interviewId)
         {
+            
             var result = _context.Interviews as IQueryable<Interview>;
+
+            var locationList = _context.Locations as IQueryable<Location>;
+            var positionList = _context.Positions as IQueryable<Position>;
+            var candidateList = _context.Candidates as IQueryable<Candidate>;
+
+            foreach (Interview interview in result)
+            {
+                foreach (Location location in locationList)
+                { 
+                    if (interview.LocationID == location.LocationID)
+                    interview.LocationID = location.LocationName; 
+                }
+                foreach (Position position in positionList)
+                {
+                    if (interview.PositionID == position.PositionID)
+                        interview.PositionID =position.Title;
+                }
+                foreach (Candidate candidate in candidateList)
+                {
+                    if (interview.CandidateID == candidate.CandidateID)
+                        interview.CandidateID = candidate.Name;
+                }
+            }
 
             if (!string.IsNullOrEmpty(interviewId))
             {
@@ -51,7 +74,6 @@ namespace JobBoard.Controllers
         {
             try
             {
-
                 _context.Interviews.Add(interviewId);
                 _context.SaveChanges();
 
@@ -86,6 +108,7 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/interviews/{interview.InterviewID.ToLower()}", interview);
             }
+
             catch (Exception e)
             {
                 // Typically an error log is produced here
@@ -109,6 +132,7 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/interview/{interview.InterviewID.ToLower()}", interview);
             }
+
             catch (Exception e)
             {
                 // Typically an error log is produced here

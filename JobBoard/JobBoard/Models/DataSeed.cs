@@ -13,7 +13,7 @@ namespace JobBoard.Models
             Location returnLocation = new Location()
             {
                 LocationID = "123",
-                CompanyName = "Taco Bell",
+                LocationName = "Taco Bell",
                 Address = "1 Taco Bell Ave" 
             };
             Candidate seedCandidate = new Candidate()
@@ -41,16 +41,11 @@ namespace JobBoard.Models
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now
             };           
-            
-            context.Locations.Add(returnLocation);
-            context.Positions.Add(seedPosition);
-            context.Interviews.Add(seedInterview);
-            context.Candidates.Add(seedCandidate);
-
+           
             Location returnLocation2 = new Location()
             {
                 LocationID = "321",
-                CompanyName = "Burger King",
+                LocationName = "Burger King",
                 Address = "1 Burger King Ave"
             };
 
@@ -79,6 +74,11 @@ namespace JobBoard.Models
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now
             };
+
+            context.Locations.Add(returnLocation);
+            context.Positions.Add(seedPosition);
+            context.Interviews.Add(seedInterview);
+            context.Candidates.Add(seedCandidate);
 
             context.Locations.Add(returnLocation2);
             context.Positions.Add(seedPosition2);

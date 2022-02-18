@@ -48,12 +48,12 @@ namespace JobBoard.Controllers
         {
             try
             {
-
                 _context.Candidates.Add(candidate);
                 _context.SaveChanges();
 
                 return new CreatedResult($"/candidates/{candidate.CandidateID.ToLower()}", candidate);
             }
+            
             catch (Exception e)
             {
                 // Typically an error log is produced here
@@ -75,8 +75,6 @@ namespace JobBoard.Controllers
                 candidate.Name = newCandidate.Name ?? candidate.Name;
                 candidate.Phone = newCandidate.Phone ?? candidate.Phone;
                 candidate.Email = newCandidate.Email ?? candidate.Email;
-                
-
 
                 _context.Candidates.Update(candidate);
                 _context.SaveChanges();
@@ -106,6 +104,7 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/candidates/{candidate.CandidateID.ToLower()}", candidate);
             }
+
             catch (Exception e)
             {
                 // Typically an error log is produced here

@@ -11,15 +11,14 @@ namespace JobBoard.Models
         [Key]
         [Display(Name = "Location ID")]
         public string LocationID { get; set; }
-        //Rename company name to location name
+
         [Required]
-        [Display(Name = "Company Name")]
-        public string CompanyName { get; set; }
+        [Display(Name = "Location Name")]
+        public string LocationName { get; set; }
+        
         [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        //[Display(Name = "Position List")]
-        //public virtual List<Position> PositionList { get; set; }  
     }
 }

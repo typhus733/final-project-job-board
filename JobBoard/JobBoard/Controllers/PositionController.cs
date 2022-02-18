@@ -57,6 +57,7 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
             }
+            
             catch (Exception e)
             {
                 // Typically an error log is produced here
@@ -83,6 +84,7 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
             }
+
             catch (Exception e)
             {
                 // Typically an error log is produced here

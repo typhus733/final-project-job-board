@@ -56,6 +56,7 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/locations/{location.LocationID.ToLower()}", location);
             }
+            
             catch (Exception e)
             {
                 // Typically an error log is produced here
@@ -67,14 +68,14 @@ namespace JobBoard.Controllers
         [Route("{locationID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Location> PatchLocation([FromRoute] string locationId, [FromBody] LocationPatch newLocation)
+        public ActionResult<Location> PatchLocation([FromRoute] string locationID, [FromBody] LocationPatch newLocation)
         {
             try
             {
                 var locationList = _context.Locations as IQueryable<Location>;
-                var location = locationList.First(p => p.LocationID.Equals(locationId));
+                var location = locationList.First(p => p.LocationID.Equals(locationID));
 
-                location.CompanyName = newLocation.CompanyName ?? location.CompanyName;
+                location.LocationName = newLocation.LocationName ?? location.LocationName;
                 location.Address = newLocation.Address ?? location.Address;              
 
                 _context.Locations.Update(location);
@@ -82,13 +83,14 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/locations/{location.LocationID.ToLower()}", location);
             }
+
             catch (Exception e)
             {
                 // Typically an error log is produced here
                 return ValidationProblem(e.Message);
             }
         }
-        //Update location delete to delete all locations tied to location
+        
         [HttpDelete]
         [Route("{locationID}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -124,6 +126,7 @@ namespace JobBoard.Controllers
 
                 return new CreatedResult($"/locations/{location.LocationID.ToLower()}", location);
             }
+
             catch (Exception e)
             {
                 // Typically an error log is produced here

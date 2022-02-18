@@ -23,7 +23,6 @@ namespace JobBoard.Models
         [Display(Name = "Candidate")]
         public string CandidateID { get; set; }        
 
-        //Update datetime for taking time in
         [Required]
         [Display(Name = "Start Time")]
         public virtual DateTime StartTime { get; set; }

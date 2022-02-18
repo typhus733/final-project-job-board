@@ -11,12 +11,15 @@ namespace JobBoard.Models
         [Key]
         [Display(Name = "Position ID")]
         public string PositionID { get; set; }
+
         [Required]
         [Display(Name = "Title")]
         public string Title { get; set; }
+        
         [Required]
         [Display(Name = "Description")]
         public string Description { get; set; }
+        
         [Required]
         [Display(Name = "Location ID")]
         public string LocationID { get; set; }   

@@ -18,7 +18,6 @@ namespace JobBoard.Models
         [Display(Name = "Location")]
         public string LocationID { get; set; }
 
-        //Update datetime to take specific time
         [Display(Name = "Start Time")]
         public virtual DateTime? StartTime { get; set; }
         
