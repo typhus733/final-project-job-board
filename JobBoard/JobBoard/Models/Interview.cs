@@ -21,8 +21,7 @@ namespace JobBoard.Models
         public string LocationID { get; set; }
         [Required]
         [Display(Name = "Candidate")]
-        public string CandidateID { get; set; }
-        public string CandidateId { get; internal set; }
+        public string CandidateID { get; set; }        
 
         //Update datetime for taking time in
         [Required]

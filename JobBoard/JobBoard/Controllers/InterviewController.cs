@@ -26,17 +26,17 @@ namespace JobBoard.Controllers
             DataSeed.InitData(context);
         }
 
-        //No ID for interviews but this filters interviews by location
+        
         [HttpGet]
         [Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IQueryable<Interview>> GetInterview([FromQuery] string locationId)
+        public ActionResult<IQueryable<Interview>> GetInterview([FromQuery] string interviewId)
         {
             var result = _context.Interviews as IQueryable<Interview>;
 
-            if (!string.IsNullOrEmpty(locationId))
+            if (!string.IsNullOrEmpty(interviewId))
             {
-                result = result.Where(i => i.LocationID.StartsWith(locationId, StringComparison.InvariantCultureIgnoreCase));
+                result = result.Where(i => i.InterviewID.StartsWith(interviewId, StringComparison.InvariantCultureIgnoreCase));
             }
 
             return Ok(result
@@ -44,18 +44,18 @@ namespace JobBoard.Controllers
                 .Take(15));
         }
         
-        /*[HttpPost]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Location> PostInterview([FromBody] Interview )
+        public ActionResult<Interview> PostInterview([FromBody] Interview interviewId)
         {
             try
             {
 
-                _context.Locations.Add(location);
+                _context.Interviews.Add(interviewId);
                 _context.SaveChanges();
 
-                return new CreatedResult($"/locations/{location.LocationID.ToLower()}", location);
+                return new CreatedResult($"/interviews/{interviewId.InterviewID.ToLower()}", interviewId);
             }
             catch (Exception e)
             {
@@ -63,55 +63,58 @@ namespace JobBoard.Controllers
                 return ValidationProblem(e.Message);
             }
         }
+
         [HttpPatch]
-        [Route("{locationId}")]
+        [Route("{interviewId}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Location> PatchLocation([FromRoute] string locationId, [FromBody] LocationPatch newLocation)
+        public ActionResult<Location> PatchInterview([FromRoute] string interviewId, [FromBody] InterviewPatch newInterview)
         {
             try
             {
-                var locationList = _context.Locations as IQueryable<Location>;
-                var location = locationList.First(p => p.LocationID.Equals(locationId));
+                var interviewList = _context.Interviews as IQueryable<Interview>;
+                var interview = interviewList.First(p => p.InterviewID.Equals(interviewId));
 
-                location.CompanyName = newLocation.CompanyName ?? location.CompanyName;
-                location.Address = newLocation.Address ?? location.Address;
-                //location.PositionList = newLocation.PositionList ?? location.PositionList;
-                //location.InterviewList = newLocation.InterviewList ?? location.InterviewList;
+                interview.CandidateID = newInterview.CandidateId ?? interview.CandidateID;
+                interview.PositionID = newInterview.PositionID ?? interview.PositionID;
+                interview.LocationID = newInterview.LocationID ?? interview.LocationID;
 
 
-                _context.Locations.Update(location);
+
+                _context.Interviews.Update(interview);
                 _context.SaveChanges();
 
-                return new CreatedResult($"/locations/{location.LocationID.ToLower()}", location);
+                return new CreatedResult($"/interviews/{interview.InterviewID.ToLower()}", interview);
             }
             catch (Exception e)
             {
                 // Typically an error log is produced here
                 return ValidationProblem(e.Message);
             }
-            [HttpDelete]
-            [Route("{locationID}")]
-            [ProducesResponseType(StatusCodes.Status201Created)]
-            [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            public ActionResult<Location> DeleteLocation([FromRoute] string locationID)
+        }
+
+        [HttpDelete]
+        [Route("{interviewId}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Interview> DeleteInterview([FromRoute] string interviewId)
+        {
+            try
             {
-                try
-                {
-                    var locationList = _context.Locations as IQueryable<Location>;
-                    var location = locationList.First(p => p.LocationID.Equals(locationID));
+                var interviewList = _context.Interviews as IQueryable<Interview>;
+                var interview = interviewList.First(p => p.InterviewID.Equals(interviewId));
 
-                    _context.Locations.Remove(location);
-                    _context.SaveChanges();
+                _context.Interviews.Remove(interview);
+                _context.SaveChanges();
 
-                    return new CreatedResult($"/locations/{location.LocationID.ToLower()}", location);
-                }
-                catch (Exception e)
-                {
-                    // Typically an error log is produced here
-                    return ValidationProblem(e.Message);
-                }
-            }*/
+                return new CreatedResult($"/interview/{interview.InterviewID.ToLower()}", interview);
+            }
+            catch (Exception e)
+            {
+                // Typically an error log is produced here
+                return ValidationProblem(e.Message);
+            }
+        }
     }
 }
 
