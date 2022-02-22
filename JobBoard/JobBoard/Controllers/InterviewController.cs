@@ -41,19 +41,28 @@ namespace JobBoard.Controllers
             foreach (Interview interview in result)
             {
                 foreach (Location location in locationList)
-                { 
+                {
                     if (interview.LocationID == location.LocationID)
-                    interview.LocationID = location.LocationName; 
+                    {
+                        interview.LocationID = location.LocationName;
+                        continue;
+                    }
                 }
                 foreach (Position position in positionList)
                 {
                     if (interview.PositionID == position.PositionID)
-                        interview.PositionID =position.Title;
+                    {
+                        interview.PositionID = position.Title;
+                        continue;
+                    }
                 }
                 foreach (Candidate candidate in candidateList)
                 {
                     if (interview.CandidateID == candidate.CandidateID)
+                    {
                         interview.CandidateID = candidate.Name;
+                        continue;
+                    }
                 }
             }
 
