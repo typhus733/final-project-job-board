@@ -13,5 +13,8 @@ namespace JobBoard.Models
         
         [Display(Name = "Description")]
         public string Description { get; set; }
+
+        [Display(Name = "Is Fulltime")]
+        public bool IsFulltime { get; set; }
     }
 }

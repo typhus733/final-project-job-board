@@ -23,5 +23,9 @@ namespace JobBoard.Models
         [Required]
         [Display(Name = "Location ID")]
         public string LocationID { get; set; }   
+
+        [Required]
+        [Display(Name = "Is Fulltime")]
+        public bool IsFulltime { get; set; }
     }
 }

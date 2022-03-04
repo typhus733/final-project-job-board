@@ -29,6 +29,7 @@ namespace JobBoard.Models
                 PositionID = "345",
                 Title = "Cashier",
                 Description = "Tough Job",
+                IsFulltime = false,
                 LocationID = returnLocation.LocationID
             };
 
@@ -62,6 +63,7 @@ namespace JobBoard.Models
                 PositionID = "543",
                 Title = "Flipper",
                 Description = "Worst job ever",
+                IsFulltime = true,
                 LocationID = returnLocation2.LocationID
             };
 

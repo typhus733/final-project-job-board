@@ -78,7 +78,10 @@ namespace JobBoard.Controllers
 
                 position.Title = newPosition.Title ?? position.Title;
                 position.Description = newPosition.Description ?? position.Description;
-
+                if (newPosition.IsFulltime != position.IsFulltime) 
+                {
+                    position.IsFulltime = newPosition.IsFulltime;
+                }
                 _context.Positions.Update(position);
                 _context.SaveChanges();
 
