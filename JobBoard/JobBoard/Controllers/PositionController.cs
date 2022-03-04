@@ -103,6 +103,16 @@ namespace JobBoard.Controllers
                 var positionList = _context.Positions as IQueryable<Position>;
                 var position = positionList.First(p => p.PositionID.Equals(positionID));
 
+                var interviewList = _context.Interviews as IQueryable<Interview>;
+
+                foreach (Interview i in interviewList)
+                {
+                    if (i.PositionID == positionID)
+                    {
+                        _context.Interviews.Remove(i);
+                    }
+                }
+
                 _context.Positions.Remove(position);
                 _context.SaveChanges();
 
