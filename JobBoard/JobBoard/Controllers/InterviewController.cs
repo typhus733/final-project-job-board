@@ -15,34 +15,35 @@ namespace JobBoard.Controllers
     [Produces("application/json")]
     public class InterviewController : ControllerBase
     {
-        private readonly InterviewDao _interviewDao;
+        //    private readonly InterviewDao _interviewDao;
 
-        public InterviewController(InterviewDao interviewDao)
-        {
-            _interviewDao = interviewDao;
-        }
+        //    public InterviewController(InterviewDao interviewDao)
+        //    {
+        //        _interviewDao = interviewDao;
+        //    }
 
-        [HttpGet]
-        [Route("")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-       
-        
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //    [HttpGet]
+        //    [Route("")]
+        //    [ProducesResponseType(StatusCodes.Status200OK)]
 
 
-        [HttpPatch]
-        [Route("{interviewID}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //    [HttpPost]
+        //    [ProducesResponseType(StatusCodes.Status201Created)]
+        //    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 
-        [HttpDelete]
-        [Route("{interviewID}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //    [HttpPatch]
+        //    [Route("{interviewID}")]
+        //    [ProducesResponseType(StatusCodes.Status201Created)]
+        //    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
+
+        //    [HttpDelete]
+        //    [Route("{interviewID}")]
+        //    [ProducesResponseType(StatusCodes.Status201Created)]
+        //    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        //}
     }
 }
 

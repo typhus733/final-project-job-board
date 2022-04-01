@@ -11,17 +11,17 @@ namespace JobBoard.Models
     {
         [Key]
         [Required]
-        [Display(Name = "Interview ID")]
-        public string InterviewID { get; set; }
+        [Display(Name = "ID")]
+        public int ID { get; set; }
         [Required]
         [Display(Name = "Position")]
-        public string PositionID { get; set; }
+        public int PositionID { get; set; }
         [Required]
         [Display(Name = "Location")]
-        public string LocationID { get; set; }
+        public int LocationID { get; set; }
         [Required]
         [Display(Name = "Candidate")]
-        public string CandidateID { get; set; }        
+        public int CandidateID { get; set; }        
 
         [Required]
         [Display(Name = "Start Time")]

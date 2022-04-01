@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace JobBoard.Controllers
 {
     [ApiController]
-    [ApiVersion("1.0")]
-    [Route("v{version:apiVersion}/[controller]")]
-    [Produces("application/json")]
+    //[ApiVersion("1.0")]
+    //[Route("v{version:apiVersion}/[controller]")]
+    //[Produces("application/json")]
     public class LocationController : ControllerBase
     {
         private readonly LocationDao _locationDao;
@@ -23,25 +23,103 @@ namespace JobBoard.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("locations")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetLocations()
+        {
+            try
+            {
+                var locations = await _locationDao.GetLocations();
+                return Ok(locations);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("locations/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetLocationById([FromRoute]int id)
+        {
+            try
+            {
+                var location = await _locationDao.GetLocationById(id);
+                if (location == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(location);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
 
         [HttpPost]
+        [Route("locations")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> InsertLocation([FromBody] Location insertRequest)
+        {
+            try
+            {
+                await _locationDao.CreateLocation(insertRequest);
+                return Ok(insertRequest);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
-
-        [HttpPatch]
-        [Route("{locationID}")]
+        [HttpPut]
+        [Route("locations")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateLocationById ([FromBody]Location updateRequest)
+        {
+            try
+            {
+                var location = await _locationDao.GetLocationById(updateRequest.Id);
+                if (location == null)
+                {
+                    return StatusCode(404);
+                }
 
+                await _locationDao.UpdateLocationById(updateRequest);
+                return StatusCode(204);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
         [HttpDelete]
-        [Route("{locationID}")]
+        [Route("location/{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        
+        public async Task<IActionResult> DeleteLocationById([FromRoute] int id)
+        {
+            try
+            {
+                var location = await _locationDao.GetLocationById(id);
+                if (location == null)
+                {
+                    return StatusCode(404);
+                }
+
+                await _locationDao.DeleteLocationById(id);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);            
+            }
+        }
     }
 }
