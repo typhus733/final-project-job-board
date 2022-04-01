@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using JobBoard.DAO;
 using Microsoft.EntityFrameworkCore;
+using Dapper;
 
 namespace JobBoard
 {
@@ -27,20 +28,29 @@ namespace JobBoard
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<DapperContext>();
+            services.AddScoped<LocationDao>();
+            services.AddScoped<InterviewDao>();
+            services.AddScoped<CandidateDao>();
+            services.AddScoped<PositionDao>();
             services.AddControllers();
-            services.AddDbContext<JobBoardContext>(opt => opt.UseLazyLoadingProxies().UseInMemoryDatabase("JobBoard"));
-            services.AddApiVersioning(opt => opt.ReportApiVersions = true);
+
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "Job Board",
-                Description = "The ultimate Job Board",
+                Title = "JobBoard",
+                Description = "A CRUD API for an internal company Job Board",
                 Version = "v1"
+
             }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
             app.UseSwagger();
             app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "JobBoard v1"));
             app.UseRouting();

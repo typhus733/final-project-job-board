@@ -15,15 +15,11 @@ namespace JobBoard.Controllers
     [Produces("application/json")]
     public class PositionController : ControllerBase
     {
-        private readonly JobBoardContext _context;
+        private readonly PositionDao _positionDao;
 
-        public PositionController(JobBoardContext context)
+        public PositionController(PositionDao positionDao)
         {
-            _context = context;
-
-            if (_context.Positions.Any()) return;
-
-            DataSeed.InitData(context);
+            _positionDao = positionDao;
         }
 
         [HttpGet]
