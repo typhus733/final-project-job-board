@@ -9,119 +9,114 @@ using System.Threading.Tasks;
 
 namespace JobBoard.Controllers
 {
-    //[ApiController]
-    //[ApiVersion("1.0")]
-    //[Route("v{version:apiVersion}/[controller]")]
-    //[Produces("application/json")]
-    //public class PositionController : ControllerBase
-    //{
-    //    private readonly PositionDao _positionDao;
+    [ApiController]
+    public class PositionController : ControllerBase
+    {
+        private readonly PositionDao _positionDao;
 
-    //    public PositionController(PositionDao positionDao)
-    //    {
-    //        _positionDao = positionDao;
-    //    }
+        public PositionController(PositionDao positionDao)
+        {
+            _positionDao = positionDao;
+        }
 
-    //    [HttpGet]
-    //    [Route("")]
-    //    [ProducesResponseType(StatusCodes.Status200OK)]
-    //    public ActionResult<IQueryable<Position>> GetPositions([FromQuery] string positionId)
-    //    {
-    //        var result = _context.Positions as IQueryable<Position>;
+        [HttpGet]
+        [Route("positions")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetPositions()
+        {
+            try
+            {
+                var positions = await _positionDao.GetPositions();
+                return Ok(positions);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
-    //        if (!string.IsNullOrEmpty(positionId))
-    //        {
-    //            result = result.Where(p => p.PositionID.StartsWith(positionId, StringComparison.InvariantCultureIgnoreCase));
-    //        }
+        [HttpGet]
+        [Route("positions/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetPositionById([FromRoute] int id)
+        {
+            try
+            {
+                var position = await _positionDao.GetPositionById(id);
+                if (position == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(position);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
-    //        return Ok(result
-    //            .OrderBy(p => p.PositionID)
-    //            .Take(15));
-    //    }
 
+        [HttpPost]
+        [Route("positions")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> InsertPosition([FromBody] Position insertRequest)
+        {
+            try
+            {
+                await _positionDao.CreatePosition(insertRequest);
+                return Ok(insertRequest);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
-    //    [HttpPost]
-    //    [ProducesResponseType(StatusCodes.Status201Created)]
-    //    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    //    public ActionResult<Location> PostPosition([FromBody] Position position)
-    //    {
-    //        try
-    //        {
+        [HttpPut]
+        [Route("positions")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdatePositionById([FromBody] Position updateRequest)
+        {
+            try
+            {
+                var position = await _positionDao.GetPositionById(updateRequest.Id);
+                if (position == null)
+                {
+                    return StatusCode(404);
+                }
 
-    //            _context.Positions.Add(position);
-    //            _context.SaveChanges();
+                await _positionDao.UpdatePositionById(updateRequest);
+                return StatusCode(204);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
-    //            return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
-    //        }
-            
-    //        catch (Exception e)
-    //        {
-    //            // Typically an error log is produced here
-    //            return ValidationProblem(e.Message);
-    //        }
-    //    }
+        [HttpDelete]
+        [Route("positions/{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeletePositionById([FromRoute] int id)
+        {
+            try
+            {
+                var position = await _positionDao.GetPositionById(id);
+                if (position == null)
+                {
+                    return StatusCode(404);
+                }
 
-    //    [HttpPatch]
-    //    [Route("{positionID}")]
-    //    [ProducesResponseType(StatusCodes.Status201Created)]
-    //    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    //    public ActionResult<Location> PatchPosition([FromRoute] string positionID, [FromBody] PositionPatch newPosition)
-    //    {
-    //        try
-    //        {
-    //            var positionList = _context.Positions as IQueryable<Position>;
-    //            var position = positionList.First(p => p.PositionID.Equals(positionID));
-
-    //            position.Title = newPosition.Title ?? position.Title;
-    //            position.Description = newPosition.Description ?? position.Description;
-    //            if (newPosition.IsFulltime != position.IsFulltime) 
-    //            {
-    //                position.IsFulltime = newPosition.IsFulltime;
-    //            }
-    //            _context.Positions.Update(position);
-    //            _context.SaveChanges();
-
-    //            return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
-    //        }
-
-    //        catch (Exception e)
-    //        {
-    //            // Typically an error log is produced here
-    //            return ValidationProblem(e.Message);
-    //        }
-    //    }
-        
-    //    [HttpDelete]
-    //    [Route("{positionID}")]
-    //    [ProducesResponseType(StatusCodes.Status201Created)]
-    //    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    //    public ActionResult<Position> DeletePosition([FromRoute] string positionID)
-    //    {
-    //        try
-    //        {
-    //            var positionList = _context.Positions as IQueryable<Position>;
-    //            var position = positionList.First(p => p.PositionID.Equals(positionID));
-
-    //            var interviewList = _context.Interviews as IQueryable<Interview>;
-
-    //            foreach (Interview i in interviewList)
-    //            {
-    //                if (i.PositionID == positionID)
-    //                {
-    //                    _context.Interviews.Remove(i);
-    //                }
-    //            }
-
-    //            _context.Positions.Remove(position);
-    //            _context.SaveChanges();
-
-    //            return new CreatedResult($"/positions/{position.PositionID.ToLower()}", position);
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            // Typically an error log is produced here
-    //            return ValidationProblem(e.Message);
-    //        }
-    //    }
-    //}
+                await _positionDao.DeletePositionById(id);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+    }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dapper;
+using JobBoard.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +14,61 @@ namespace JobBoard.DAO
         public InterviewDao(DapperContext context)
         {
             _context = context;
+        }
+        public async Task<IEnumerable<Interview>> GetInterviews()
+        {
+            var query = $"SELECT * FROM Interview";
+            using (var connection = _context.CreateConnection())
+            {
+                var interviews = await connection.QueryAsync<Interview>(query);
+
+                return interviews.ToList();
+            }
+        }
+
+        public async Task<Interview> GetInterviewById(int id)
+        {
+            var query = $"SELECT * FROM Interview WHERE Id = {id}";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var interview = await connection.QueryFirstOrDefaultAsync<Interview>(query);
+                return interview;
+            }
+        }
+
+        public async Task DeleteInterviewById(int id)
+        {
+            var query = $"DELETE FROM Interview WHERE Id = {id}";
+
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query);
+            }
+        }
+
+        public async Task UpdateInterviewById(Interview updateRequest)
+        {
+            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionID}, LocationId={updateRequest.LocationID}, CandidateId={updateRequest.CandidateID}," +
+                        $"StartTime='{updateRequest.StartTime}', EndTime='{updateRequest.EndTime}' WHERE Id='{updateRequest.Id}'";
+
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query);
+            }
+
+        }
+
+        public async Task CreateInterview(Interview insertRequest)
+        {
+            var query = $"SET Identity_INSERT Interview ON INSERT INTO Interview " +
+                $"(Id, PositionId, LocationId, CandidateId, StartTime, EndTime) VALUES ({insertRequest.Id}, {insertRequest.PositionID}, " +
+                $"{insertRequest.LocationID}, {insertRequest.CandidateID}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
+
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query);
+            }
         }
 
     }
