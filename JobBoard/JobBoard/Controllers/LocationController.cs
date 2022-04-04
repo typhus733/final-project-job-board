@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 namespace JobBoard.Controllers
 {
     [ApiController]
-    //[ApiVersion("1.0")]
-    //[Route("v{version:apiVersion}/[controller]")]
-    //[Produces("application/json")]
+    
     public class LocationController : ControllerBase
     {
         private readonly LocationDao _locationDao;
@@ -100,7 +98,7 @@ namespace JobBoard.Controllers
         }
 
         [HttpDelete]
-        [Route("location/{id}")]
+        [Route("locations/{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteLocationById([FromRoute] int id)

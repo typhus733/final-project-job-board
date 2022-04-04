@@ -9,8 +9,8 @@ namespace JobBoard.Models
     public class Candidate
     {
         [Key]
-        [Display(Name = "ID")]
-        public int ID { get; set; }
+        [Display(Name = "Id")]
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Name")]
@@ -18,7 +18,7 @@ namespace JobBoard.Models
 
         [Required]
         [Display(Name = "Phone Number")]
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         [Display(Name = "Email")]

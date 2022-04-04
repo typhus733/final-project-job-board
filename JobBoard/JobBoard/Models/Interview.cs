@@ -11,8 +11,8 @@ namespace JobBoard.Models
     {
         [Key]
         [Required]
-        [Display(Name = "ID")]
-        public int ID { get; set; }
+        [Display(Name = "Id")]
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Position")]
         public int PositionID { get; set; }
