@@ -56,10 +56,10 @@ INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (
 INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (2, 2, 3, '20220330 10:30 AM', '20220330 11:00 AM');
 INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (3, 1, 2,'20220331 8:00 AM', '20220331 9:00 AM');
 INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (4, 3, 2,'20220331 8:00 AM', '20220331 9:00 AM');
-INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (3, 2, 4,'20220401 1:00 PM', '20220401 2:00 PM');
-INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (5, 1, 4,'20220401 1:00 PM', '20220401 2:00 PM');
-INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (4, 2, 1,'20220329 12:00 PM', '20220329 1:00 PM');
-INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (5, 4, 1,'20220329 12:00 PM', '20220329 1:00 PM');
-INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (3, 3, 5,'20220327 7:00 AM', '20220327 8:00 AM');
-INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (5, 5, 5,'20220327 7:00 AM', '20220327 8:00 AM');
+INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (5, 2, 4,'20220401 1:00 PM', '20220401 2:00 PM');
+INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (6, 1, 4,'20220401 1:00 PM', '20220401 2:00 PM');
+INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (7, 2, 1,'20220329 12:00 PM', '20220329 1:00 PM');
+INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (8, 4, 1,'20220329 12:00 PM', '20220329 1:00 PM');
+INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (9, 3, 5,'20220327 7:00 AM', '20220327 8:00 AM');
+INSERT INTO Interview (Id, PositionId, CandidateId, StartTime, EndTime) VALUES (10, 5, 5,'20220327 7:00 AM', '20220327 8:00 AM');
 SET IDENTITY_INSERT Interview OFF;
