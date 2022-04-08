@@ -58,14 +58,12 @@ namespace JobBoard.Controllers
 
         [HttpPost]
         [Route("positions")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> InsertPosition([FromBody] Position insertRequest)
+        public async Task<IActionResult> CreatePosition([FromBody] Position insertRequest)
         {
             try
             {
                 await _positionDao.CreatePosition(insertRequest);
-                return Ok(insertRequest);
+                return StatusCode(204);
             }
             catch (Exception e)
             {

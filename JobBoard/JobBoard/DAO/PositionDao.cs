@@ -2,6 +2,7 @@
 using JobBoard.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,7 +50,7 @@ namespace JobBoard.DAO
 
         public async Task UpdatePositionById(Position updateRequest)
         {
-            var query = $"UPDATE Position SET Title= '{updateRequest.Title}', Description='{updateRequest.Description}', LocationId='{updateRequest.LocationID}'," +
+            var query = $"UPDATE Position SET Title= '{updateRequest.Title}', Description='{updateRequest.Department}', LocationId='{updateRequest.LocationID}'," +
                         $"IsFullTime='{updateRequest.IsFulltime}' WHERE Id='{updateRequest.Id}'";
 
             using (var connection = _context.CreateConnection())
@@ -61,15 +62,21 @@ namespace JobBoard.DAO
 
         public async Task CreatePosition(Position insertRequest)
         {
-            var query = $"SET Identity_INSERT Position ON INSERT INTO Position " +
-                $"(Id, Title, Description, LocationId, IsFullTime) VALUES ({insertRequest.Id}, '{insertRequest.Title}', " +
-                $"'{insertRequest.Description}', '{insertRequest.LocationID}', '{insertRequest.IsFulltime}')";
+            var query = $"INSERT INTO Position (Title, Department, LocationID, IsFullTime) VALUES (@Title, @Department, @LocationID, @IsFullTime)";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", insertRequest.Id, DbType.Int32);
+            parameters.Add("Title", insertRequest.Title, DbType.String);
+            parameters.Add("Department", insertRequest.Department, DbType.String);
+            parameters.Add("LocationID", insertRequest.LocationID, DbType.Int32);
+            parameters.Add("IsFulltime", insertRequest.IsFulltime, DbType.Boolean);
+
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.ExecuteAsync(query);
+                await connection.ExecuteAsync(query, parameters);
             }
-        }
 
+        }
     }
 }

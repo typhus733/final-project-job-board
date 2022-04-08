@@ -2,6 +2,7 @@
 using JobBoard.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,20 @@ namespace JobBoard.DAO
 
         public async Task CreateInterview(Interview insertRequest)
         {
-            var query = $"SET Identity_INSERT Interview ON INSERT INTO Interview " +
-                $"(Id, PositionId, LocationId, CandidateId, StartTime, EndTime) VALUES ({insertRequest.Id}, {insertRequest.PositionID}, " +
-                $"{insertRequest.LocationID}, {insertRequest.CandidateID}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
+            var query = $"INSERT INTO Interview (PositionId, LocationId, CandidateId, StartTime, EndTime) VALUES (@PositionId, @LocationId, @CandidateId, @StartTime, @EndTime)";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", insertRequest.Id, DbType.Int32);
+            parameters.Add("PositionId", insertRequest.PositionID, DbType.Int32);
+            parameters.Add("LocationId", insertRequest.LocationID, DbType.Int32);
+            parameters.Add("CandidateId", insertRequest.CandidateID, DbType.Int32);
+            parameters.Add("StartTime", insertRequest.StartTime, DbType.DateTime);
+            parameters.Add("EndTime", insertRequest.EndTime, DbType.DateTime);
+
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.ExecuteAsync(query);
+                await connection.ExecuteAsync(query, parameters);
             }
         }
 

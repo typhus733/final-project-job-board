@@ -13,12 +13,12 @@ namespace JobBoard.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Location Name")]
-        public string LocationName { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
         
         [Required]
-        [Display(Name = "Street Address")]
-        public string StreetAddress { get; set; }
+        [Display(Name = "Street")]
+        public string Street { get; set; }
 
         [Required]
         [Display(Name = "City")]

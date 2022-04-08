@@ -17,12 +17,12 @@ namespace JobBoard.Models
         public string Title { get; set; }
         
         [Required]
-        [Display(Name = "Description")]
-        public string Description { get; set; }
+        [Display(Name = "Department")]
+        public string Department { get; set; }
         
         [Required]
         [Display(Name = "Location ID")]
-        public string LocationID { get; set; }   
+        public int LocationID { get; set; }   
 
         [Required]
         [Display(Name = "Is Fulltime")]

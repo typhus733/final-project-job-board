@@ -2,6 +2,7 @@
 using JobBoard.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,20 @@ namespace JobBoard.DAO
 
         public async Task CreateCandidate(Candidate insertRequest)
         {
-            var query = $"SET IDENTITY_INSERT Candidate ON INSERT INTO Candidate " +
-                $"(Id, Name, PhoneNumber, Email) VALUES ({insertRequest.Id}, '{insertRequest.Name}', " +
-                $"'{insertRequest.PhoneNumber}', '{insertRequest.Email}')";
+
+
+            var query = $"INSERT INTO Candidate (Name, PhoneNumber, Email) VALUES (@Name, @PhoneNumber, @Email)";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", insertRequest.Id, DbType.Int32);
+            parameters.Add("Name", insertRequest.Name, DbType.String);
+            parameters.Add("PhoneNumber", insertRequest.PhoneNumber, DbType.String);
+            parameters.Add("Email", insertRequest.Email, DbType.String);
+
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.ExecuteAsync(query);
+                await connection.ExecuteAsync(query, parameters);
             }
         }
 

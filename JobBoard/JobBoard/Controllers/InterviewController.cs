@@ -58,14 +58,12 @@ namespace JobBoard.Controllers
 
         [HttpPost]
         [Route("interviews")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> InsertInterview([FromBody] Interview insertRequest)
+        public async Task<IActionResult> CreateInterview([FromBody] Interview insertRequest)
         {
             try
             {
                 await _interviewDao.CreateInterview(insertRequest);
-                return Ok(insertRequest);
+                return StatusCode(204);
             }
             catch (Exception e)
             {

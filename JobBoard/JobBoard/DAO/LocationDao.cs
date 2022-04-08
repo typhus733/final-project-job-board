@@ -2,6 +2,7 @@
 using JobBoard.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -50,7 +51,7 @@ namespace JobBoard.DAO
         
         public async Task UpdateLocationById(Location updateRequest)
         {
-            var query = $"UPDATE Location SET LocationName= '{updateRequest.LocationName}', StreetAddress='{updateRequest.StreetAddress}', City='{updateRequest.City}',"+
+            var query = $"UPDATE Location SET LocationName= '{updateRequest.Name}', StreetAddress='{updateRequest.Street}', City='{updateRequest.City}',"+
                         $"State='{updateRequest.State}', Zip='{updateRequest.Zip}' WHERE Id='{updateRequest.Id}'";
 
             using (var connection = _context.CreateConnection())
@@ -62,13 +63,20 @@ namespace JobBoard.DAO
 
         public async Task CreateLocation (Location insertRequest)
         {
-            var query = $"SET Identity_INSERT Location ON INSERT INTO Location " +
-                $"(Id, LocationName, StreetAddress, City, State, Zip) VALUES ({insertRequest.Id}, '{insertRequest.LocationName}', " +
-                $"'{insertRequest.StreetAddress}', '{insertRequest.City}', '{insertRequest.State}', '{insertRequest.Zip}')";
+            var query = $"INSERT INTO Location (Name, Street, City, State, Zip) VALUES (@Name, @Street, @City, @State, @Zip) ";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", insertRequest.Id, DbType.Int32);
+            parameters.Add("LocationName", insertRequest.Name, DbType.String);
+            parameters.Add("StreetAddress", insertRequest.Street, DbType.String);
+            parameters.Add("City", insertRequest.City, DbType.String);
+            parameters.Add("State", insertRequest.State, DbType.String);
+            parameters.Add("Zip", insertRequest.Zip, DbType.Int32);
+
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.ExecuteAsync(query);
+                await connection.ExecuteAsync(query, parameters);
             }
         }
 

@@ -57,14 +57,12 @@ namespace JobBoard.Controllers
 
         [HttpPost]
         [Route("candidates")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> InsertCandidate([FromBody] Candidate insertRequest)
+        public async Task<IActionResult> CreateCandidate([FromBody] Candidate insertRequest)
         {
             try
             {
                 await _candidateDao.CreateCandidate(insertRequest);
-                return Ok(insertRequest);
+                return StatusCode(204);
             }
             catch (Exception e)
             {
