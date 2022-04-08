@@ -21,7 +21,6 @@ namespace JobBoard.Controllers
 
         [HttpGet]
         [Route("interviews")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetInterviews()
         {
             try
@@ -37,7 +36,6 @@ namespace JobBoard.Controllers
 
         [HttpGet]
         [Route("interviews/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetInterviewById([FromRoute] int id)
         {
             try
@@ -73,8 +71,6 @@ namespace JobBoard.Controllers
 
         [HttpPut]
         [Route("interviews")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateInterviewById([FromBody] Interview updateRequest)
         {
             try
@@ -96,8 +92,6 @@ namespace JobBoard.Controllers
 
         [HttpDelete]
         [Route("interviews/{id}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteInterviewById([FromRoute] int id)
         {
             try
@@ -110,6 +104,44 @@ namespace JobBoard.Controllers
 
                 await _interviewDao.DeleteInterviewById(id);
                 return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("interviews/candidates/{candidateid}")]
+        public async Task<IActionResult> GetInterviewsbyCandidateID([FromRoute] int candidateid)
+        {
+            try
+            {
+                var interviews = await _interviewDao.GetInterviewsbyCandidateId(candidateid);
+                if (interviews == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(interviews);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("interviews/positions/{positionid}")]
+        public async Task<IActionResult> GetInterviewsbyPositionId([FromRoute] int positionid)
+        {
+            try
+            {
+                var interviews = await _interviewDao.GetInterviewsbyPositionId(positionid);
+                if (interviews == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(interviews);
             }
             catch (Exception e)
             {

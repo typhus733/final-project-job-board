@@ -22,7 +22,6 @@ namespace JobBoard.Controllers
 
         [HttpGet]
         [Route("locations")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetLocations()
         {
             try
@@ -38,7 +37,6 @@ namespace JobBoard.Controllers
 
         [HttpGet]
         [Route("locations/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetLocationById([FromRoute]int id)
         {
             try
@@ -74,8 +72,6 @@ namespace JobBoard.Controllers
 
         [HttpPut]
         [Route("locations")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateLocationById ([FromBody]Location updateRequest)
         {
             try
@@ -97,8 +93,6 @@ namespace JobBoard.Controllers
 
         [HttpDelete]
         [Route("locations/{id}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteLocationById([FromRoute] int id)
         {
             try

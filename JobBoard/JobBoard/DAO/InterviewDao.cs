@@ -78,5 +78,27 @@ namespace JobBoard.DAO
             }
         }
 
+        public async Task<IEnumerable<Interview>> GetInterviewsbyCandidateId(int id)
+        {
+            var query = $"SELECT * FROM Interview WHERE CandidateID = {id}";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var interviews = await connection.QueryAsync<Interview>(query);
+                return interviews.ToList();
+            }
+        }
+
+        public async Task<IEnumerable<Interview>> GetInterviewsbyPositionId(int id)
+        {
+            var query = $"SELECT * FROM Interview WHERE PositionID = {id}";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var interviews = await connection.QueryAsync<Interview>(query);
+                return interviews.ToList();
+            }
+        }
+
     }
 }

@@ -79,5 +79,16 @@ namespace JobBoard.DAO
             }
         }
 
+        public async Task<IEnumerable<Position>> GetPositionsByCandidateId(int id)
+        {
+            var query = $"Select Interview.Id, PositionId, Position.Title, CandidateId, Candidate.Name, Position.Department, Position.LocationId, Position.isFullTime from Interview JOIN Position ON Interview.PositionId = Position.Id " +
+            $"JOIN Candidate ON Interview.CandidateId = Candidate.Id WHERE Candidate.Id = { id}";
+            using (var connection = _context.CreateConnection())
+            {
+                var positions = await connection.QueryAsync<Position>(query);
+                return positions.ToList();
+            }
+        }
+
     }
 }

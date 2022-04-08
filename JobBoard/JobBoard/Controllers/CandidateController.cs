@@ -20,7 +20,6 @@ namespace JobBoard.Controllers
 
         [HttpGet]
         [Route("candidates")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCandidates()
         {
             try
@@ -36,7 +35,6 @@ namespace JobBoard.Controllers
 
         [HttpGet]
         [Route("candidates/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCandidateById([FromRoute] int id)
         {
             try
@@ -72,8 +70,6 @@ namespace JobBoard.Controllers
 
         [HttpPut]
         [Route("candidates")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateCandidateById([FromBody] Candidate updateRequest)
         {
             try
@@ -95,8 +91,6 @@ namespace JobBoard.Controllers
 
         [HttpDelete]
         [Route("candidates/{id}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteCandidateById([FromRoute] int id)
         {
             try
@@ -109,6 +103,25 @@ namespace JobBoard.Controllers
 
                 await _candidateDao.DeleteCandidateById(id);
                 return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("candidates/positions/{id}")]
+        public async Task<IActionResult> GetPositionsByCandidateId([FromRoute] int id)
+        {
+            try
+            {
+                var candidate = await _candidateDao.GetPositionsByCandidateId(id);
+                if (candidate == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(candidate);
             }
             catch (Exception e)
             {
