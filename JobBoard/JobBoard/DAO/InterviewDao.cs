@@ -50,7 +50,7 @@ namespace JobBoard.DAO
 
         public async Task UpdateInterviewById(Interview updateRequest)
         {
-            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionID}, LocationId={updateRequest.LocationID}, CandidateId={updateRequest.CandidateID}," +
+            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionID}, CandidateId={updateRequest.CandidateID}," +
                         $"StartTime='{updateRequest.StartTime}', EndTime='{updateRequest.EndTime}' WHERE Id='{updateRequest.Id}'";
 
             using (var connection = _context.CreateConnection())
@@ -59,15 +59,14 @@ namespace JobBoard.DAO
             }
 
         }
-
+        
         public async Task CreateInterview(Interview insertRequest)
         {
-            var query = $"INSERT INTO Interview (PositionId, LocationId, CandidateId, StartTime, EndTime) VALUES (@PositionId, @LocationId, @CandidateId, @StartTime, @EndTime)";
+            var query = $"INSERT INTO Interview (PositionId, CandidateId, StartTime, EndTime) VALUES (@PositionId,@CandidateId, @StartTime, @EndTime)";
 
             var parameters = new DynamicParameters();
             parameters.Add("Id", insertRequest.Id, DbType.Int32);
             parameters.Add("PositionId", insertRequest.PositionID, DbType.Int32);
-            parameters.Add("LocationId", insertRequest.LocationID, DbType.Int32);
             parameters.Add("CandidateId", insertRequest.CandidateID, DbType.Int32);
             parameters.Add("StartTime", insertRequest.StartTime, DbType.DateTime);
             parameters.Add("EndTime", insertRequest.EndTime, DbType.DateTime);
