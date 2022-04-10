@@ -110,5 +110,24 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("positions/locations/{id}")]
+        public async Task<IActionResult> GetPositionsByLocationId([FromRoute] int id)
+        {
+            try
+            {
+                var position = await _positionDao.GetPositionsByLocationId(id);
+                if (position == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(position);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

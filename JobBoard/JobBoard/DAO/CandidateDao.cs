@@ -88,7 +88,6 @@ namespace JobBoard.DAO
                 var positions = await connection.QueryAsync<Position>(query);
                 return positions.ToList();
             }
-        }
-
+        }        
     }
 }

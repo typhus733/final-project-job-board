@@ -100,5 +100,17 @@ namespace JobBoard.DAO
             }
         }
 
+        public async Task<IEnumerable<Interview>> GetInterviewsbyLocationId(int id)
+        {
+            var query = $"SELECT Interview.Id, Interview.PositionId, Interview.CandidateId, Interview.StartTime, Interview.EndTime, Position.LocationId " +
+            $"From Interview Join Position ON Interview.PositionId = Position.Id Join Location on Position.LocationId = Location.Id " +
+            $"Where Location.Id = { id}";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var interviews = await connection.QueryAsync<Interview>(query);
+                return interviews.ToList();
+            }
+        }
     }
 }

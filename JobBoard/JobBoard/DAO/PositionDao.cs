@@ -78,5 +78,15 @@ namespace JobBoard.DAO
             }
 
         }
+
+        public async Task<IEnumerable<Position>> GetPositionsByLocationId(int id)
+        {
+            var query = $"Select * from Position where LocationId = { id}";
+            using (var connection = _context.CreateConnection())
+            {
+                var positions = await connection.QueryAsync<Position>(query);
+                return positions.ToList();
+            }
+        }
     }
 }
