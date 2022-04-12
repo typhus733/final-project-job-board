@@ -112,5 +112,17 @@ namespace JobBoard.DAO
                 return interviews.ToList();
             }
         }
+
+        public async Task<IEnumerable<Interview>> GetInterviewsbyDate(string date)
+        {
+            var query = $"SELECT * FROM Interview WHERE StartTime BETWEEN '{date}' and '{date} 23:59:59'";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var interviews = await connection.QueryAsync<Interview>(query);
+                return interviews.ToList();
+            }
+        }
+
     }
 }

@@ -167,6 +167,26 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("interviews/date/{date}")]
+        public async Task<IActionResult> GetInterviewsbyDate([FromRoute] string date)
+        {
+            try
+            {
+                var interview = await _interviewDao.GetInterviewsbyDate(date);
+                if (interview == null)
+                {
+                    return StatusCode(404);
+                }
+                return Ok(interview);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
     }
 }
 
