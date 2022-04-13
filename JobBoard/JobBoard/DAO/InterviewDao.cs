@@ -62,19 +62,11 @@ namespace JobBoard.DAO
         
         public async Task CreateInterview(Interview insertRequest)
         {
-            var query = $"INSERT INTO Interview (PositionId, CandidateId, StartTime, EndTime) VALUES (@PositionId,@CandidateId, @StartTime, @EndTime)";
-
-            var parameters = new DynamicParameters();
-            parameters.Add("Id", insertRequest.Id, DbType.Int32);
-            parameters.Add("PositionId", insertRequest.PositionID, DbType.Int32);
-            parameters.Add("CandidateId", insertRequest.CandidateID, DbType.Int32);
-            parameters.Add("StartTime", insertRequest.StartTime, DbType.DateTime);
-            parameters.Add("EndTime", insertRequest.EndTime, DbType.DateTime);
-
+            var query = $"INSERT INTO Interview (PositionID, CandidateID, StartTime, EndTime) VALUES ({insertRequest.PositionID}, {insertRequest.CandidateID}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.ExecuteAsync(query, parameters);
+                await connection.ExecuteAsync(query);
             }
         }
 
@@ -113,9 +105,10 @@ namespace JobBoard.DAO
             }
         }
 
-        public async Task<IEnumerable<Interview>> GetInterviewsbyDate(string date)
+        public async Task<IEnumerable<Interview>> GetInterviewsbyDate(DateTime date)
         {
-            var query = $"SELECT * FROM Interview WHERE StartTime BETWEEN '{date}' and '{date} 23:59:59'";
+            string formatedDate = date.ToString("MM'-'dd'-'yyyy");
+            var query = $"SELECT * FROM Interview WHERE StartTime BETWEEN '{formatedDate}' and '{formatedDate} 23:59:59'";
 
             using (var connection = _context.CreateConnection())
             {

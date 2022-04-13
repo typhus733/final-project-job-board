@@ -169,8 +169,8 @@ namespace JobBoard.Controllers
         }
 
         [HttpGet]
-        [Route("interviews/date/{date}")]
-        public async Task<IActionResult> GetInterviewsbyDate([FromRoute] string date)
+        [Route("interviews/date")]
+        public async Task<IActionResult> GetInterviewsbyDate([FromQuery] DateTime date)
         {
             try
             {

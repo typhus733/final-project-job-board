@@ -63,20 +63,12 @@ namespace JobBoard.DAO
 
         public async Task CreateLocation (Location insertRequest)
         {
-            var query = $"INSERT INTO Location (Name, Street, City, State, Zip) VALUES (@Name, @Street, @City, @State, @Zip) ";
-
-            var parameters = new DynamicParameters();
-            parameters.Add("Id", insertRequest.Id, DbType.Int32);
-            parameters.Add("LocationName", insertRequest.Name, DbType.String);
-            parameters.Add("StreetAddress", insertRequest.Street, DbType.String);
-            parameters.Add("City", insertRequest.City, DbType.String);
-            parameters.Add("State", insertRequest.State, DbType.String);
-            parameters.Add("Zip", insertRequest.Zip, DbType.Int32);
+            var query = $"INSERT INTO Location (Name, Street, City, State, Zip) VALUES ('{insertRequest.Name}', '{insertRequest.Street}', '{insertRequest.City}', '{insertRequest.Street}',  {insertRequest.Zip}) ";
 
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.ExecuteAsync(query, parameters);
+                await connection.ExecuteAsync(query);
             }
         }
 

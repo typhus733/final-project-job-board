@@ -62,19 +62,12 @@ namespace JobBoard.DAO
 
         public async Task CreatePosition(Position insertRequest)
         {
-            var query = $"INSERT INTO Position (Title, Department, LocationID, IsFullTime) VALUES (@Title, @Department, @LocationID, @IsFullTime)";
-
-            var parameters = new DynamicParameters();
-            parameters.Add("Id", insertRequest.Id, DbType.Int32);
-            parameters.Add("Title", insertRequest.Title, DbType.String);
-            parameters.Add("Department", insertRequest.Department, DbType.String);
-            parameters.Add("LocationID", insertRequest.LocationID, DbType.Int32);
-            parameters.Add("IsFulltime", insertRequest.IsFulltime, DbType.Boolean);
+            var query = $"INSERT INTO Position (Title, Department, LocationID, IsFullTime) VALUES ( '{insertRequest.Title}', '{insertRequest.Department}', {insertRequest.LocationID},  '{insertRequest.IsFulltime}')";
 
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.ExecuteAsync(query, parameters);
+                await connection.ExecuteAsync(query);
             }
 
         }
