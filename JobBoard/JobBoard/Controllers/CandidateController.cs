@@ -116,12 +116,12 @@ namespace JobBoard.Controllers
         {
             try
             {
-                var candidate = await _candidateDao.GetPositionsByCandidateId(id);
-                if (candidate == null)
+                var positions = await _candidateDao.GetPositionsByCandidateId(id);
+                if (positions.Count() == 0)
                 {
                     return StatusCode(404);
                 }
-                return Ok(candidate);
+                return Ok(positions);
             }
             catch (Exception e)
             {

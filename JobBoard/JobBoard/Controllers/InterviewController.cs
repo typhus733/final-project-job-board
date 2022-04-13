@@ -118,7 +118,7 @@ namespace JobBoard.Controllers
             try
             {
                 var interviews = await _interviewDao.GetInterviewsbyCandidateId(candidateid);
-                if (interviews == null)
+                if (interviews.Count() == 0)
                 {
                     return StatusCode(404);
                 }
@@ -137,7 +137,7 @@ namespace JobBoard.Controllers
             try
             {
                 var interviews = await _interviewDao.GetInterviewsbyPositionId(positionid);
-                if (interviews == null)
+                if (interviews.Count() == 0)
                 {
                     return StatusCode(404);
                 }
@@ -156,7 +156,7 @@ namespace JobBoard.Controllers
             try
             {
                 var interviews = await _interviewDao.GetInterviewsbyLocationId(locationid);
-                if (interviews == null)
+                if (interviews.Count() == 0)
                 {
                     return StatusCode(404);
                 }
@@ -175,7 +175,7 @@ namespace JobBoard.Controllers
             try
             {
                 var interview = await _interviewDao.GetInterviewsbyDate(date);
-                if (interview == null)
+                if (interview.Count() == 0)
                 {
                     return StatusCode(404);
                 }

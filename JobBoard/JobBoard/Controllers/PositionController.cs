@@ -117,12 +117,12 @@ namespace JobBoard.Controllers
         {
             try
             {
-                var position = await _positionDao.GetPositionsByLocationId(id);
-                if (position == null)
+                var positions = await _positionDao.GetPositionsByLocationId(id);
+                if (positions.Count() == 0)
                 {
                     return StatusCode(404);
                 }
-                return Ok(position);
+                return Ok(positions);
             }
             catch (Exception e)
             {
