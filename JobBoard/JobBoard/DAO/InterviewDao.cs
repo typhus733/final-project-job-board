@@ -107,8 +107,7 @@ namespace JobBoard.DAO
 
         public async Task<IEnumerable<Interview>> GetInterviewsbyDate(DateTime date)
         {
-            string formatedDate = date.ToString("MM'-'dd'-'yyyy");
-            var query = $"SELECT * FROM Interview WHERE StartTime BETWEEN '{formatedDate}' and '{formatedDate} 23:59:59'";
+            var query = $"SELECT * FROM Interview WHERE StartTime BETWEEN '{date.ToString("MM'-'dd'-'yyyy")}' and '{date.ToString("MM'-'dd'-'yyyy")} 23:59:59'";
 
             using (var connection = _context.CreateConnection())
             {
