@@ -51,7 +51,7 @@ INSERT INTO Position (Id, Title, Department, LocationId, IsFullTime) VALUES (6, 
 INSERT INTO Position (Id, Title, Department, LocationId, IsFullTime) VALUES (7, 'Maintenance', 'Facilities', '3', 1);
 INSERT INTO Position (Id, Title, Department, LocationId, IsFullTime) VALUES (8, 'HR Business Partner', 'Human Resources', '5', 1);
 INSERT INTO Position (Id, Title, Department, LocationId, IsFullTime) VALUES (9, 'Recruiter', 'Human Resources', '5', 1);
-INSERT INTO Position (Id, Title, Department, LocationId, IsFullTime) VALUES (10, 'CUnderwriter', 'Production', '1', 1);
+INSERT INTO Position (Id, Title, Department, LocationId, IsFullTime) VALUES (10, 'Underwriter', 'Production', '1', 1);
 SET IDENTITY_INSERT Position OFF;
 
 SET IDENTITY_INSERT Candidate ON; 
