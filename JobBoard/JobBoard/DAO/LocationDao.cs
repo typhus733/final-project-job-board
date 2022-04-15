@@ -51,7 +51,7 @@ namespace JobBoard.DAO
         
         public async Task UpdateLocationById(Location updateRequest)
         {
-            var query = $"UPDATE Location SET LocationName= '{updateRequest.Name}', StreetAddress='{updateRequest.Street}', City='{updateRequest.City}',"+
+            var query = $"UPDATE Location SET Name= '{updateRequest.Name}', Street='{updateRequest.Street}', City='{updateRequest.City}',"+
                         $"State='{updateRequest.State}', Zip='{updateRequest.Zip}' WHERE Id='{updateRequest.Id}'";
 
             using (var connection = _context.CreateConnection())
