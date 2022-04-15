@@ -26,6 +26,10 @@ namespace JobBoard.Controllers
             try
             {
                 var interviews = await _interviewDao.GetInterviews();
+                if (interviews.Count() == 0)
+                {
+                    return StatusCode(404);
+                }
                 return Ok(interviews);
             }
             catch (Exception e)

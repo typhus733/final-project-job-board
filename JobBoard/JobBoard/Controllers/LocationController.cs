@@ -27,6 +27,10 @@ namespace JobBoard.Controllers
             try
             {
                 var locations = await _locationDao.GetLocations();
+                if (locations.Count() == 0)
+                {
+                    return StatusCode(404);
+                }
                 return Ok(locations);
             }
             catch (Exception e)

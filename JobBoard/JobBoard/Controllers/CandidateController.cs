@@ -25,6 +25,10 @@ namespace JobBoard.Controllers
             try
             {
                 var candidates = await _candidateDao.GetCandidates();
+                if (candidates.Count() == 0)
+                {
+                    return StatusCode(404);
+                }
                 return Ok(candidates);
             }
             catch (Exception e)
