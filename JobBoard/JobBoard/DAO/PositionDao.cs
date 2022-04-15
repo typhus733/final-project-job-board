@@ -50,7 +50,7 @@ namespace JobBoard.DAO
 
         public async Task UpdatePositionById(Position updateRequest)
         {
-            var query = $"UPDATE Position SET Title= '{updateRequest.Title}', Description='{updateRequest.Department}', LocationId='{updateRequest.LocationID}'," +
+            var query = $"UPDATE Position SET Title= '{updateRequest.Title}', Department='{updateRequest.Department}', LocationId='{updateRequest.LocationID}'," +
                         $"IsFullTime='{updateRequest.IsFulltime}' WHERE Id='{updateRequest.Id}'";
 
             using (var connection = _context.CreateConnection())
