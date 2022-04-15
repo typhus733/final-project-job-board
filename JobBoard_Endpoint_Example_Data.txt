@@ -1,9 +1,11 @@
 CANDIDATE:
+Post:
 "first_name": "Gerald",
 "last_name": "Ford",
 "phoneNumber": "2312255327",
 "email": "GeraldF@Yahoo.com"
 
+Put:
 "id": 3
 "first_name": "Tony",
 "last_name": "Robbins,
@@ -11,11 +13,13 @@ CANDIDATE:
 "email": "TonyRobbins@vu.com"
 
 INTERVIEW:
+Post:
 "positionID": 4,
 "candidateID": 3,
 "startTime": "2022-04-30",
 "endTime": "2022-04-30"
 
+Put:
 "id": 5
 "positionID": 5,
 "candidateID": 1,
@@ -23,12 +27,14 @@ INTERVIEW:
 "endTime": "2022-04-22"
 
 LOCATION:
+Post:
 "name": "Papa",
 "street": "14 Meadowlark Lane",
 "city": "Columbia",
 "state": "MO",
 "zip": 65201
-  
+
+Put:  
 "id": 1,
 "name": "Foxtrot",
 "street": "33 Forum Blvd",
@@ -38,11 +44,13 @@ LOCATION:
 
 
 POSITION:
+Post:
 "title": "Groundskeeper",
 "department": "Facilities",
 "locationID": 3,
 "isFulltime": true
 
+Put:
 "id": 4,
 "title": "Database Engineer",
 "department": "Software Services",
