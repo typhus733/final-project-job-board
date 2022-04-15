@@ -6,9 +6,9 @@ Post:
 "email": "GeraldF@Yahoo.com"
 
 Put:
-"id": 3
+"id": 3,
 "first_name": "Tony",
-"last_name": "Robbins,
+"last_name": "Robbins",
 "phoneNumber": "6933452424",
 "email": "TonyRobbins@vu.com"
 
@@ -16,19 +16,19 @@ INTERVIEW:
 Post:
 "positionID": 4,
 "candidateID": 3,
-"startTime": "2022-04-30",
-"endTime": "2022-04-30"
+"startTime": "2022-04-30T08:00:00",
+"endTime": "2022-04-30T08:00:00"
 
 Put:
 "id": 5
 "positionID": 5,
 "candidateID": 1,
-"startTime": "2022-04-22",
-"endTime": "2022-04-22"
+"startTime": "2022-04-22T08:00:00",
+"endTime": "2022-04-22T08:00:00"
 
 LOCATION:
 Post:
-"name": "Papa",
+"name": "Zulu",
 "street": "14 Meadowlark Lane",
 "city": "Columbia",
 "state": "MO",

@@ -51,7 +51,7 @@ namespace JobBoard.DAO
 
         public async Task UpdateCandidateById(Candidate updateRequest)
         {
-            var query = $"UPDATE Candidate SET Name= '{updateRequest.First_Name}', Name= '{updateRequest.Last_Name}', PhoneNumber='{updateRequest.PhoneNumber}', Email='{updateRequest.Email}' WHERE Id='{updateRequest.Id}'";
+            var query = $"UPDATE Candidate SET First_Name= '{updateRequest.First_Name}', Last_Name= '{updateRequest.Last_Name}', PhoneNumber='{updateRequest.PhoneNumber}', Email='{updateRequest.Email}' WHERE Id='{updateRequest.Id}'";
 
             using (var connection = _context.CreateConnection())
             {
