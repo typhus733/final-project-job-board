@@ -1,0 +1,50 @@
+CANDIDATE:
+"first_name": "Gerald",
+"last_name": "Ford",
+"phoneNumber": "231225532768",
+"email": "GeraldF@Yahoo.com"
+
+"id": 3
+"first_name": "Tony",
+"last_name": "Robbins,
+"phoneNumber": "6933452424",
+"email": "TonyRobbins@vu.com"
+
+INTERVIEW:
+"positionID": 4,
+"candidateID": 3,
+"startTime": "2022-04-30",
+"endTime": "2022-04-30"
+
+"id": 5
+"positionID": 5,
+"candidateID": 1,
+"startTime": "2022-04-22",
+"endTime": "2022-04-22"
+
+LOCATION:
+"name": "Papa",
+"street": "14 Meadowlark Lane",
+"city": "Columbia",
+"state": "MO",
+"zip": 65201
+  
+"id": 1,
+"name": "Foxtrot",
+"street": "33 Forum Blvd",
+"city": "Columbia",
+"state": "MO",
+"zip": 65203
+
+
+POSITION:
+"title": "Groundskeeper",
+"department": "Facilities",
+"locationID": 3,
+"isFulltime": true
+
+"id": 4,
+"title": "Database Engineer",
+"department": "Software Services",
+"locationID": 5,
+"isFulltime": true
