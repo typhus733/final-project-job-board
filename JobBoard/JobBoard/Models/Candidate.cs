@@ -13,8 +13,12 @@ namespace JobBoard.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Display(Name = "First Name")]
+        public string First_Name { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string Last_Name { get; set; }
 
         [Required]
         [Display(Name = "Phone Number")]

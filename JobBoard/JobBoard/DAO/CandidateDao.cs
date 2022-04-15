@@ -51,7 +51,7 @@ namespace JobBoard.DAO
 
         public async Task UpdateCandidateById(Candidate updateRequest)
         {
-            var query = $"UPDATE Candidate SET Name= '{updateRequest.Name}', PhoneNumber='{updateRequest.PhoneNumber}', Email='{updateRequest.Email}' WHERE Id='{updateRequest.Id}'";
+            var query = $"UPDATE Candidate SET Name= '{updateRequest.First_Name}', Name= '{updateRequest.Last_Name}', PhoneNumber='{updateRequest.PhoneNumber}', Email='{updateRequest.Email}' WHERE Id='{updateRequest.Id}'";
 
             using (var connection = _context.CreateConnection())
             {
@@ -64,7 +64,7 @@ namespace JobBoard.DAO
         {
 
 
-            var query = $"INSERT INTO Candidate (Name, PhoneNumber, Email) VALUES ('{insertRequest.Name}', '{insertRequest.PhoneNumber}', '{insertRequest.Email}')";
+            var query = $"INSERT INTO Candidate (First_Name, Last_Name, PhoneNumber, Email) VALUES ('{insertRequest.First_Name}', '{insertRequest.Last_Name}', '{insertRequest.PhoneNumber}', '{insertRequest.Email}')";
 
 
             using (var connection = _context.CreateConnection())
@@ -75,8 +75,8 @@ namespace JobBoard.DAO
 
         public async Task<IEnumerable<Position>> GetPositionsByCandidateId(int id)
         {
-            var query = $"Select Interview.Id, PositionId, Position.Title, CandidateId, Candidate.Name, Position.Department, Position.LocationId, Position.isFullTime from Interview JOIN Position ON Interview.PositionId = Position.Id " +
-            $"JOIN Candidate ON Interview.CandidateId = Candidate.Id WHERE Candidate.Id = { id}";
+            var query = $"Select Interview.Id, PositionId, Position.Title, CandidateId, Candidate.First_Name, Candidate.Last_Name, Position.Department, Position.LocationId, Position.isFullTime from Interview JOIN Position ON Interview.PositionId = Position.Id " +
+            $"JOIN Candidate ON Interview.CandidateId = Candidate.Id WHERE Candidate.Id = {id}";
             using (var connection = _context.CreateConnection())
             {
                 var positions = await connection.QueryAsync<Position>(query);
