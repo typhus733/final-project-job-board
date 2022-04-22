@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,13 +36,20 @@ namespace JobBoard
             services.AddScoped<PositionDao>();
             services.AddControllers();
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
+            services.AddSwaggerGen(c =>
             {
-                Title = "JobBoard",
-                Description = "A CRUD API for an internal company Job Board",
-                Version = "v1"
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "JobBoard",
+                        Description = "A CRUD API for an internal company Job Board",
+                        Version = "v1"
+                    }
+               );
 
-            }));
+                var filePath = Path.Combine(AppContext.BaseDirectory, "JobBoard.xml");
+                c.IncludeXmlComments(filePath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
