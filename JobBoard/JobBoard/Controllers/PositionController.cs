@@ -116,12 +116,12 @@ namespace JobBoard.Controllers
         }
 
         [HttpGet]
-        [Route("positions/locations/{id}")]
-        public async Task<IActionResult> GetPositionsByLocationId([FromRoute] int id)
+        [Route("positions/locations/{locationId}")]
+        public async Task<IActionResult> GetPositionsByLocationId([FromRoute] int locationId)
         {
             try
             {
-                var positions = await _positionDao.GetPositionsByLocationId(id);
+                var positions = await _positionDao.GetPositionsByLocationId(locationId);
                 if (positions.Count() == 0)
                 {
                     return StatusCode(404);
