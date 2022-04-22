@@ -19,7 +19,10 @@ namespace JobBoard.Controllers
         {
             _locationDao = locationDao;
         }
-
+        /// <summary>
+        /// Get all Locations
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("locations")]
         public async Task<IActionResult> GetLocations()
@@ -38,7 +41,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Get Location by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("locations/{id}")]
         public async Task<IActionResult> GetLocationById([FromRoute]int id)
@@ -58,7 +65,11 @@ namespace JobBoard.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Post new Location
+        /// </summary>
+        /// <param name="insertRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("locations")]
         public async Task<IActionResult> CreateLocation([FromBody] Location insertRequest)
@@ -73,7 +84,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Update Location
+        /// </summary>
+        /// <param name="updateRequest"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("locations")]
         public async Task<IActionResult> UpdateLocationById ([FromBody]Location updateRequest)
@@ -94,7 +109,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Delete Location 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("locations/{id}")]
         public async Task<IActionResult> DeleteLocationById([FromRoute] int id)

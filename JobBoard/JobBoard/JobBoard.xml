@@ -4,5 +4,183 @@
         <name>JobBoard</name>
     </assembly>
     <members>
+        <member name="M:JobBoard.Controllers.CandidateController.GetCandidates">
+            <summary>
+            Get all Candidates
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.CandidateController.GetCandidateById(System.Int32)">
+            <summary>
+            Get Candidates by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.CandidateController.CreateCandidate(JobBoard.Models.Candidate)">
+            <summary>
+            Post new Candidate
+            </summary>
+            <param name="insertRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.CandidateController.UpdateCandidateById(JobBoard.Models.Candidate)">
+            <summary>
+            Update Candidate
+            </summary>
+            <param name="updateRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.CandidateController.DeleteCandidateById(System.Int32)">
+            <summary>
+            Delete Candidate
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.CandidateController.GetPositionsByCandidateId(System.Int32)">
+            <summary>
+            Get Candidates by PositionId
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.GetInterviews">
+            <summary>
+            Get all Interviews
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.GetInterviewById(System.Int32)">
+            <summary>
+            Get Interviews by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.CreateInterview(JobBoard.Models.Interview)">
+            <summary>
+            Post new Interview
+            </summary>
+            <param name="insertRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.UpdateInterviewById(JobBoard.Models.Interview)">
+            <summary>
+            Update Interview
+            </summary>
+            <param name="updateRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.DeleteInterviewById(System.Int32)">
+            <summary>
+            Delete Interview
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.GetInterviewsbyCandidateID(System.Int32)">
+            <summary>
+            Get Interview by CandidateId
+            </summary>
+            <param name="candidateid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.GetInterviewsbyPositionId(System.Int32)">
+            <summary>
+            Get Interview by PositionId
+            </summary>
+            <param name="positionid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.GetInterviewsbyLocationId(System.Int32)">
+            <summary>
+            Get Interview by LocationId
+            </summary>
+            <param name="locationid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.InterviewController.GetInterviewsbyDate(System.DateTime)">
+            <summary>
+            Get Interview by Date
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.LocationController.GetLocations">
+            <summary>
+            Get all Locations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.LocationController.GetLocationById(System.Int32)">
+            <summary>
+            Get Location by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.LocationController.CreateLocation(JobBoard.Models.Location)">
+            <summary>
+            Post new Location
+            </summary>
+            <param name="insertRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.LocationController.UpdateLocationById(JobBoard.Models.Location)">
+            <summary>
+            Update Location
+            </summary>
+            <param name="updateRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.LocationController.DeleteLocationById(System.Int32)">
+            <summary>
+            Delete Location 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.PositionController.GetPositions">
+            <summary>
+            Get all Positions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.PositionController.GetPositionById(System.Int32)">
+            <summary>
+            Get Position by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.PositionController.CreatePosition(JobBoard.Models.Position)">
+            <summary>
+            Post new Position
+            </summary>
+            <param name="insertRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.PositionController.UpdatePositionById(JobBoard.Models.Position)">
+            <summary>
+            Update Position
+            </summary>
+            <param name="updateRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.PositionController.DeletePositionById(System.Int32)">
+            <summary>
+            Delete Position
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobBoard.Controllers.PositionController.GetPositionsByLocationId(System.Int32)">
+            <summary>
+            Get Positions by LocationId
+            </summary>
+            <param name="locationId"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

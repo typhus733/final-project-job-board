@@ -18,6 +18,11 @@ namespace JobBoard.Controllers
             _candidateDao = candidateDao;
         }
 
+        /// <summary>
+        /// Get all Candidates
+        /// </summary>
+        /// <returns></returns>
+
         [HttpGet]
         [Route("candidates")]
         public async Task<IActionResult> GetCandidates()
@@ -37,6 +42,11 @@ namespace JobBoard.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Candidates by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("candidates/{id}")]
         public async Task<IActionResult> GetCandidateById([FromRoute] int id)
@@ -56,7 +66,11 @@ namespace JobBoard.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Post new Candidate
+        /// </summary>
+        /// <param name="insertRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("candidates")]
         public async Task<IActionResult> CreateCandidate([FromBody] Candidate insertRequest)
@@ -71,7 +85,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Update Candidate
+        /// </summary>
+        /// <param name="updateRequest"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("candidates")]
         public async Task<IActionResult> UpdateCandidateById([FromBody] Candidate updateRequest)
@@ -92,7 +110,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Delete Candidate
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("candidates/{id}")]
         public async Task<IActionResult> DeleteCandidateById([FromRoute] int id)
@@ -114,6 +136,11 @@ namespace JobBoard.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Candidates by PositionId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("candidates/positions/{id}")]
         public async Task<IActionResult> GetPositionsByCandidateId([FromRoute] int id)

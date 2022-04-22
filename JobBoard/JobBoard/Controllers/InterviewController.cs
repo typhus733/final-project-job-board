@@ -18,7 +18,10 @@ namespace JobBoard.Controllers
         {
             _interviewDao = interviewDao;
         }
-
+        /// <summary>
+        /// Get all Interviews
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("interviews")]
         public async Task<IActionResult> GetInterviews()
@@ -37,7 +40,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Get Interviews by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("interviews/{id}")]
         public async Task<IActionResult> GetInterviewById([FromRoute] int id)
@@ -57,7 +64,11 @@ namespace JobBoard.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Post new Interview
+        /// </summary>
+        /// <param name="insertRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("interviews")]
         public async Task<IActionResult> CreateInterview([FromBody] Interview insertRequest)
@@ -72,7 +83,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Update Interview
+        /// </summary>
+        /// <param name="updateRequest"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("interviews")]
         public async Task<IActionResult> UpdateInterviewById([FromBody] Interview updateRequest)
@@ -93,7 +108,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Delete Interview
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("interviews/{id}")]
         public async Task<IActionResult> DeleteInterviewById([FromRoute] int id)
@@ -114,7 +133,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Get Interview by CandidateId
+        /// </summary>
+        /// <param name="candidateid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("interviews/candidates/{candidateid}")]
         public async Task<IActionResult> GetInterviewsbyCandidateID([FromRoute] int candidateid)
@@ -133,7 +156,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Get Interview by PositionId
+        /// </summary>
+        /// <param name="positionid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("interviews/positions/{positionid}")]
         public async Task<IActionResult> GetInterviewsbyPositionId([FromRoute] int positionid)
@@ -152,7 +179,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Get Interview by LocationId
+        /// </summary>
+        /// <param name="locationid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("interviews/locations/{locationid}")]
         public async Task<IActionResult> GetInterviewsbyLocationId([FromRoute] int locationid)
@@ -171,7 +202,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Get Interview by Date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("interviews/date")]
         public async Task<IActionResult> GetInterviewsbyDate([FromQuery] DateTime date)

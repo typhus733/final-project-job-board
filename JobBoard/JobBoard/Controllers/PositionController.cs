@@ -19,6 +19,10 @@ namespace JobBoard.Controllers
             _positionDao = positionDao;
         }
 
+        /// <summary>
+        /// Get all Positions
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("positions")]
         public async Task<IActionResult> GetPositions()
@@ -38,6 +42,11 @@ namespace JobBoard.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Position by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("positions/{id}")]
         public async Task<IActionResult> GetPositionById([FromRoute] int id)
@@ -57,7 +66,11 @@ namespace JobBoard.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Post new Position
+        /// </summary>
+        /// <param name="insertRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("positions")]
         public async Task<IActionResult> CreatePosition([FromBody] Position insertRequest)
@@ -73,6 +86,11 @@ namespace JobBoard.Controllers
             }
         }
 
+        /// <summary>
+        /// Update Position
+        /// </summary>
+        /// <param name="updateRequest"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("positions")]
         public async Task<IActionResult> UpdatePositionById([FromBody] Position updateRequest)
@@ -94,6 +112,11 @@ namespace JobBoard.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete Position
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("positions/{id}")]
         public async Task<IActionResult> DeletePositionById([FromRoute] int id)
@@ -114,7 +137,11 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        /// <summary>
+        /// Get Positions by LocationId
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("positions/locations/{locationId}")]
         public async Task<IActionResult> GetPositionsByLocationId([FromRoute] int locationId)
