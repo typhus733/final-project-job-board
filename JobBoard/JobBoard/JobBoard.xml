@@ -4,9 +4,9 @@
         <name>JobBoard</name>
     </assembly>
     <members>
-        <member name="M:JobBoard.Controllers.CandidateController.GetCandidates">
+        <member name="M:JobBoard.Controllers.CandidateController.GetCandidates(JobBoard.Models.Candidate)">
             <summary>
-            Get all Candidates
+            Filter Candidates
             </summary>
             <returns></returns>
         </member>

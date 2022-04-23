@@ -17,14 +17,43 @@ namespace JobBoard.DAO
             _context = context;
         }
 
-        public async Task<IEnumerable<Candidate>> GetCandidates()
+        public async Task<IEnumerable<Candidate>> GetCandidates(Candidate querycandidate)
         {
-            var query = $"SELECT * FROM Candidate";
+            var query = $"SELECT * FROM Candidate WHERE 1= 1 ";
+
+            if (querycandidate.Id != 0)
+            {
+                query += "AND Id = @Id ";
+            }
+            if (!string.IsNullOrEmpty(querycandidate.First_Name))
+            {
+                query += "AND First_Name = @First_Name ";
+            }
+            if (!string.IsNullOrEmpty(querycandidate.Last_Name))
+            {
+                query += "AND Last_Name = @Last_Name ";
+            }
+            if (!string.IsNullOrEmpty(querycandidate.PhoneNumber))
+            {
+                query += "AND PhoneNumber = @PhoneNumber ";
+            }
+            if (!string.IsNullOrEmpty(querycandidate.Email))
+            {
+                query += "AND Email = @Email ";
+            }
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", querycandidate.Id, DbType.Int32);
+            parameters.Add("First_Name", querycandidate.First_Name, DbType.String);
+            parameters.Add("Last_Name", querycandidate.Last_Name, DbType.String);
+            parameters.Add("PhoneNumber", querycandidate.PhoneNumber, DbType.String);
+            parameters.Add("Email", querycandidate.Email, DbType.String);
+
+
             using (var connection = _context.CreateConnection())
             {
-                var locations = await connection.QueryAsync<Candidate>(query);
-
-                return locations.ToList();
+                var candidates = await connection.QueryAsync<Candidate>(query, parameters);
+                return candidates.ToList();
             }
         }
 
@@ -83,5 +112,7 @@ namespace JobBoard.DAO
                 return positions.ToList();
             }
         }        
+
+
     }
 }

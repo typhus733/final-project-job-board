@@ -19,17 +19,17 @@ namespace JobBoard.Controllers
         }
 
         /// <summary>
-        /// Get all Candidates
+        /// Filter Candidates
         /// </summary>
         /// <returns></returns>
 
         [HttpGet]
-        [Route("candidates")]
-        public async Task<IActionResult> GetCandidates()
+        [Route("candidates/search")]
+        public async Task<IActionResult> GetCandidates([FromQuery] Candidate querycandidate)
         {
             try
             {
-                var candidates = await _candidateDao.GetCandidates();
+                var candidates = await _candidateDao.GetCandidates(querycandidate);
                 if (candidates.Count() == 0)
                 {
                     return StatusCode(404);
