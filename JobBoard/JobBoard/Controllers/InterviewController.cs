@@ -71,7 +71,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("interviews")]
-        public async Task<IActionResult> CreateInterview([FromBody] Interview insertRequest)
+        public async Task<IActionResult> CreateInterview([FromBody] InterviewResponse insertRequest)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("interviews")]
-        public async Task<IActionResult> UpdateInterviewById([FromBody] Interview updateRequest)
+        public async Task<IActionResult> UpdateInterviewById([FromBody] InterviewResponse updateRequest)
         {
             try
             {

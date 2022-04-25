@@ -6,26 +6,18 @@ using System.Threading.Tasks;
 
 namespace JobBoard.Models
 {
-    public class Position
-    {
-        [Key]
-        [Display(Name = "Position Id")]
-        public int Id { get; set; }
-
-        [Required]
+    public class PositionRequest
+    {        
         [Display(Name = "Title")]
         public string Title { get; set; }
         
-        [Required]
         [Display(Name = "Department")]
         public string Department { get; set; }
         
-        [Required]
         [Display(Name = "Location ID")]
-        public int LocationID { get; set; }   
+        public int? LocationID { get; set; }   
 
-        [Required]
         [Display(Name = "Is Fulltime")]
-        public bool IsFulltime { get; set; }
+        public bool? IsFulltime { get; set; }
     }
 }

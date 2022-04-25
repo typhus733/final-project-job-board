@@ -25,7 +25,7 @@ namespace JobBoard.Controllers
 
         [HttpGet]
         [Route("candidates/search")]
-        public async Task<IActionResult> GetCandidates([FromQuery] Candidate querycandidate)
+        public async Task<IActionResult> GetCandidates([FromQuery] CandidateRequest querycandidate)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("candidates")]
-        public async Task<IActionResult> CreateCandidate([FromBody] Candidate insertRequest)
+        public async Task<IActionResult> CreateCandidate([FromBody] CandidateRequest insertRequest)
         {
             try
             {
@@ -86,23 +86,24 @@ namespace JobBoard.Controllers
             }
         }
         /// <summary>
-        /// Update Candidate
+        /// Update Candidate By ID
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="updateRequest"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("candidates")]
-        public async Task<IActionResult> UpdateCandidateById([FromBody] Candidate updateRequest)
+        [Route("candidates/{id}")]
+        public async Task<IActionResult> UpdateCandidateById([FromRoute] int id, [FromBody] CandidateRequest updateRequest)
         {
             try
             {
-                var candidate = await _candidateDao.GetCandidateById(updateRequest.Id);
+                var candidate = await _candidateDao.GetCandidateById(id);
                 if (candidate == null)
                 {
                     return StatusCode(404);
                 }
 
-                await _candidateDao.UpdateCandidateById(updateRequest);
+                await _candidateDao.UpdateCandidateById(updateRequest, id, candidate);
                 return StatusCode(204);
             }
             catch (Exception e)

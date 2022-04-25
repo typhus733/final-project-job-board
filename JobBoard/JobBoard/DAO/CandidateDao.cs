@@ -17,14 +17,10 @@ namespace JobBoard.DAO
             _context = context;
         }
 
-        public async Task<IEnumerable<Candidate>> GetCandidates(Candidate querycandidate)
+        public async Task<IEnumerable<CandidateResponse>> GetCandidates(CandidateRequest querycandidate)
         {
             var query = $"SELECT * FROM Candidate WHERE 1= 1 ";
-
-            if (querycandidate.Id != 0)
-            {
-                query += "AND Id = @Id ";
-            }
+           
             if (!string.IsNullOrEmpty(querycandidate.First_Name))
             {
                 query += "AND First_Name = @First_Name ";
@@ -42,8 +38,7 @@ namespace JobBoard.DAO
                 query += "AND Email = @Email ";
             }
 
-            var parameters = new DynamicParameters();
-            parameters.Add("Id", querycandidate.Id, DbType.Int32);
+            var parameters = new DynamicParameters();         
             parameters.Add("First_Name", querycandidate.First_Name, DbType.String);
             parameters.Add("Last_Name", querycandidate.Last_Name, DbType.String);
             parameters.Add("PhoneNumber", querycandidate.PhoneNumber, DbType.String);
@@ -52,18 +47,18 @@ namespace JobBoard.DAO
 
             using (var connection = _context.CreateConnection())
             {
-                var candidates = await connection.QueryAsync<Candidate>(query, parameters);
+                var candidates = await connection.QueryAsync<CandidateResponse>(query, parameters);
                 return candidates.ToList();
             }
         }
 
-        public async Task<Candidate> GetCandidateById(int id)
+        public async Task<CandidateResponse> GetCandidateById(int id)
         {
             var query = $"SELECT * FROM Candidate WHERE Id = {id}";
 
             using (var connection = _context.CreateConnection())
             {
-                var candidate = await connection.QueryFirstOrDefaultAsync<Candidate>(query);
+                var candidate = await connection.QueryFirstOrDefaultAsync<CandidateResponse>(query);
                 return candidate;
             }
         }
@@ -78,9 +73,12 @@ namespace JobBoard.DAO
             }
         }
 
-        public async Task UpdateCandidateById(Candidate updateRequest)
+        public async Task UpdateCandidateById(CandidateRequest updateRequest, int Id, CandidateResponse existingCandidate)
         {
-            var query = $"UPDATE Candidate SET First_Name= '{updateRequest.First_Name}', Last_Name= '{updateRequest.Last_Name}', PhoneNumber='{updateRequest.PhoneNumber}', Email='{updateRequest.Email}' WHERE Id='{updateRequest.Id}'";
+            var query = $"UPDATE Candidate SET First_Name= '{updateRequest.First_Name ?? existingCandidate.First_Name}', " + 
+                        $"Last_Name= '{updateRequest.Last_Name ?? existingCandidate.Last_Name}', " + 
+                        $"PhoneNumber='{updateRequest.PhoneNumber ?? existingCandidate.PhoneNumber}', " +
+                        $"Email='{updateRequest.Email ?? existingCandidate.Email}' WHERE Id='{Id}'";
 
             using (var connection = _context.CreateConnection())
             {
@@ -89,7 +87,7 @@ namespace JobBoard.DAO
 
         }
 
-        public async Task CreateCandidate(Candidate insertRequest)
+        public async Task CreateCandidate(CandidateRequest insertRequest)
         {
 
 
@@ -102,13 +100,13 @@ namespace JobBoard.DAO
             }
         }
 
-        public async Task<IEnumerable<Position>> GetPositionsByCandidateId(int id)
+        public async Task<IEnumerable<PositionResponse>> GetPositionsByCandidateId(int id)
         {
             var query = $"Select Interview.Id, PositionId, Position.Title, CandidateId, Candidate.First_Name, Candidate.Last_Name, Position.Department, Position.LocationId, Position.isFullTime from Interview JOIN Position ON Interview.PositionId = Position.Id " +
             $"JOIN Candidate ON Interview.CandidateId = Candidate.Id WHERE Candidate.Id = {id}";
             using (var connection = _context.CreateConnection())
             {
-                var positions = await connection.QueryAsync<Position>(query);
+                var positions = await connection.QueryAsync<PositionResponse>(query);
                 return positions.ToList();
             }
         }        

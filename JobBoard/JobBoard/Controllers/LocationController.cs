@@ -24,12 +24,12 @@ namespace JobBoard.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("locations")]
-        public async Task<IActionResult> GetLocations()
+        [Route("locations/search")]
+        public async Task<IActionResult> GetLocations([FromQuery] LocationRequest locationParams)
         {
             try
             {
-                var locations = await _locationDao.GetLocations();
+                var locations = await _locationDao.GetLocations(locationParams);
                 if (locations.Count() == 0)
                 {
                     return StatusCode(404);
@@ -72,7 +72,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("locations")]
-        public async Task<IActionResult> CreateLocation([FromBody] Location insertRequest)
+        public async Task<IActionResult> CreateLocation([FromBody] LocationRequest insertRequest)
         {
             try
             {
@@ -85,23 +85,24 @@ namespace JobBoard.Controllers
             }
         }
         /// <summary>
-        /// Update Location
+        /// Update Location by ID
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="updateRequest"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("locations")]
-        public async Task<IActionResult> UpdateLocationById ([FromBody]Location updateRequest)
+        [Route("locations/{id}")]
+        public async Task<IActionResult> UpdateLocationById ([FromRoute] int id, [FromBody]LocationRequest updateRequest)
         {
             try
             {
-                var location = await _locationDao.GetLocationById(updateRequest.Id);
+                var location = await _locationDao.GetLocationById(id);
                 if (location == null)
                 {
                     return StatusCode(404);
                 }
 
-                await _locationDao.UpdateLocationById(updateRequest);
+                await _locationDao.UpdateLocationById(updateRequest, id, location);
                 return StatusCode(204);
             }
             catch (Exception e)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobBoard.Models
 {
-    public class Candidate
+    public class CandidateResponse
     {
         [Key]
         [Display(Name = "Id")]

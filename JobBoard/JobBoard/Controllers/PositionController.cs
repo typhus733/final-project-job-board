@@ -24,12 +24,12 @@ namespace JobBoard.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("positions")]
-        public async Task<IActionResult> GetPositions()
+        [Route("positions/search")]
+        public async Task<IActionResult> GetPositions([FromQuery] PositionRequest positionParams)
         {
             try
             {
-                var positions = await _positionDao.GetPositions();
+                var positions = await _positionDao.GetPositions(positionParams);
                 if (positions.Count() == 0)
                 {
                     return StatusCode(404);
@@ -73,7 +73,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("positions")]
-        public async Task<IActionResult> CreatePosition([FromBody] Position insertRequest)
+        public async Task<IActionResult> CreatePosition([FromBody] PositionResponse insertRequest)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("positions")]
-        public async Task<IActionResult> UpdatePositionById([FromBody] Position updateRequest)
+        public async Task<IActionResult> UpdatePositionById([FromBody] PositionResponse updateRequest)
         {
             try
             {

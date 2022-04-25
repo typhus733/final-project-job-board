@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobBoard.Models
 {
-    public class Interview
+    public class InterviewResponse
     {
         [Key]
         [Required]

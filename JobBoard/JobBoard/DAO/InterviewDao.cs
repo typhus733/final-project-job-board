@@ -16,24 +16,24 @@ namespace JobBoard.DAO
         {
             _context = context;
         }
-        public async Task<IEnumerable<Interview>> GetInterviews()
+        public async Task<IEnumerable<InterviewResponse>> GetInterviews()
         {
             var query = $"SELECT * FROM Interview";
             using (var connection = _context.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await connection.QueryAsync<InterviewResponse>(query);
 
                 return interviews.ToList();
             }
         }
 
-        public async Task<Interview> GetInterviewById(int id)
+        public async Task<InterviewResponse> GetInterviewById(int id)
         {
             var query = $"SELECT * FROM Interview WHERE Id = {id}";
 
             using (var connection = _context.CreateConnection())
             {
-                var interview = await connection.QueryFirstOrDefaultAsync<Interview>(query);
+                var interview = await connection.QueryFirstOrDefaultAsync<InterviewResponse>(query);
                 return interview;
             }
         }
@@ -48,7 +48,7 @@ namespace JobBoard.DAO
             }
         }
 
-        public async Task UpdateInterviewById(Interview updateRequest)
+        public async Task UpdateInterviewById(InterviewResponse updateRequest)
         {
             var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionID}, CandidateId={updateRequest.CandidateID}," +
                         $"StartTime='{updateRequest.StartTime}', EndTime='{updateRequest.EndTime}' WHERE Id='{updateRequest.Id}'";
@@ -60,7 +60,7 @@ namespace JobBoard.DAO
 
         }
         
-        public async Task CreateInterview(Interview insertRequest)
+        public async Task CreateInterview(InterviewResponse insertRequest)
         {
             var query = $"INSERT INTO Interview (PositionID, CandidateID, StartTime, EndTime) VALUES ({insertRequest.PositionID}, {insertRequest.CandidateID}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
 
@@ -70,29 +70,29 @@ namespace JobBoard.DAO
             }
         }
 
-        public async Task<IEnumerable<Interview>> GetInterviewsbyCandidateId(int id)
+        public async Task<IEnumerable<InterviewResponse>> GetInterviewsbyCandidateId(int id)
         {
             var query = $"SELECT * FROM Interview WHERE CandidateID = {id}";
 
             using (var connection = _context.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await connection.QueryAsync<InterviewResponse>(query);
                 return interviews.ToList();
             }
         }
 
-        public async Task<IEnumerable<Interview>> GetInterviewsbyPositionId(int id)
+        public async Task<IEnumerable<InterviewResponse>> GetInterviewsbyPositionId(int id)
         {
             var query = $"SELECT * FROM Interview WHERE PositionID = {id}";
 
             using (var connection = _context.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await connection.QueryAsync<InterviewResponse>(query);
                 return interviews.ToList();
             }
         }
 
-        public async Task<IEnumerable<Interview>> GetInterviewsbyLocationId(int id)
+        public async Task<IEnumerable<InterviewResponse>> GetInterviewsbyLocationId(int id)
         {
             var query = $"SELECT Interview.Id, Interview.PositionId, Interview.CandidateId, Interview.StartTime, Interview.EndTime, Position.LocationId " +
             $"From Interview Join Position ON Interview.PositionId = Position.Id Join Location on Position.LocationId = Location.Id " +
@@ -100,18 +100,18 @@ namespace JobBoard.DAO
 
             using (var connection = _context.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await connection.QueryAsync<InterviewResponse>(query);
                 return interviews.ToList();
             }
         }
 
-        public async Task<IEnumerable<Interview>> GetInterviewsbyDate(DateTime date)
+        public async Task<IEnumerable<InterviewResponse>> GetInterviewsbyDate(DateTime date)
         {
             var query = $"SELECT * FROM Interview WHERE StartTime BETWEEN '{date.ToString("MM'-'dd'-'yyyy")}' and '{date.ToString("MM'-'dd'-'yyyy")} 23:59:59'";
 
             using (var connection = _context.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<Interview>(query);
+                var interviews = await connection.QueryAsync<InterviewResponse>(query);
                 return interviews.ToList();
             }
         }
