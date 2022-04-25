@@ -92,7 +92,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("locations/{id}")]
-        public async Task<IActionResult> UpdateLocationById ([FromRoute] int id, [FromBody]LocationRequest updateRequest)
+        public async Task<IActionResult> UpdateLocationById([FromRoute] int id, [FromBody]LocationRequest updateRequest)
         {
             try
             {

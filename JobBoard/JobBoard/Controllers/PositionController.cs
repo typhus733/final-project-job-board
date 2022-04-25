@@ -73,7 +73,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("positions")]
-        public async Task<IActionResult> CreatePosition([FromBody] PositionResponse insertRequest)
+        public async Task<IActionResult> CreatePosition([FromBody] PositionRequest insertRequest)
         {
             try
             {
@@ -87,23 +87,24 @@ namespace JobBoard.Controllers
         }
 
         /// <summary>
-        /// Update Position
+        /// Update Position by ID
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="updateRequest"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("positions")]
-        public async Task<IActionResult> UpdatePositionById([FromBody] PositionResponse updateRequest)
+        [Route("positions/{id}")]
+        public async Task<IActionResult> UpdatePositionById([FromRoute] int id, [FromBody] PositionRequest updateRequest)
         {
             try
             {
-                var position = await _positionDao.GetPositionById(updateRequest.Id);
+                var position = await _positionDao.GetPositionById(id);
                 if (position == null)
                 {
                     return StatusCode(404);
                 }
 
-                await _positionDao.UpdatePositionById(updateRequest);
+                await _positionDao.UpdatePositionById(updateRequest, id, position);
                 return StatusCode(204);
             }
             catch (Exception e)

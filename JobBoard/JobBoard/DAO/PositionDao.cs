@@ -74,10 +74,11 @@ namespace JobBoard.DAO
             }
         }
 
-        public async Task UpdatePositionById(PositionResponse updateRequest)
+        public async Task UpdatePositionById(PositionRequest updateRequest, int Id, PositionResponse existingPosition)
         {
-            var query = $"UPDATE Position SET Title= '{updateRequest.Title}', Department='{updateRequest.Department}', LocationId='{updateRequest.LocationID}'," +
-                        $"IsFullTime='{updateRequest.IsFulltime}' WHERE Id='{updateRequest.Id}'";
+            var query = $"UPDATE Position SET Title= '{updateRequest.Title ?? existingPosition.Title}', Department='{updateRequest.Department ?? existingPosition.Department}', " +
+                        $"LocationId='{updateRequest.LocationID ?? existingPosition.LocationID}'," +
+                        $"IsFullTime='{updateRequest.IsFulltime ?? existingPosition.IsFulltime}' WHERE Id='{Id}'";
 
             using (var connection = _context.CreateConnection())
             {
@@ -86,7 +87,7 @@ namespace JobBoard.DAO
 
         }
 
-        public async Task CreatePosition(PositionResponse insertRequest)
+        public async Task CreatePosition(PositionRequest insertRequest)
         {
             var query = $"INSERT INTO Position (Title, Department, LocationID, IsFullTime) VALUES ( '{insertRequest.Title}', '{insertRequest.Department}', {insertRequest.LocationID},  '{insertRequest.IsFulltime}')";
 

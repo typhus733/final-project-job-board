@@ -22,10 +22,10 @@ namespace JobBoard.Models
         
         [Required]
         [Display(Name = "Location ID")]
-        public int LocationID { get; set; }   
+        public int? LocationID { get; set; }   
 
         [Required]
         [Display(Name = "Is Fulltime")]
-        public bool IsFulltime { get; set; }
+        public bool? IsFulltime { get; set; }
     }
 }
