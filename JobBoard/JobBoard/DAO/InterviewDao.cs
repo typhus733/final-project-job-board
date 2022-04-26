@@ -27,6 +27,43 @@ namespace JobBoard.DAO
             }
         }
 
+        //public async Task<IEnumerable<InterviewResponse>> GetInterviews(InterviewRequest interviewParams)
+        //{
+        //    var query = $"SELECT * FROM Location WHERE 1= 1 ";
+
+        //    if (!string.IsNullOrEmpty(interviewParams.PositionID.ToString))
+        //    {
+        //        query += "AND PositionId = @PositionId ";
+        //    }
+        //    if (!string.IsNullOrEmpty(interviewParams.CandidateID.ToString))
+        //    {
+        //        query += "AND CandidateId = @CandidateId ";
+        //    }
+        //    if (!string.IsNullOrEmpty(interviewParams.StartTime))
+        //    {
+        //        query += "AND StartTime = @StartTime ";
+        //    }
+        //    if (!string.IsNullOrEmpty(interviewParams.EndTime))
+        //    {
+        //        query += "AND EndTime = @EndTime ";
+        //    }
+
+
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("Name", interviewParams.Name, DbType.String);
+        //    parameters.Add("Street", interviewParams.Street, DbType.String);
+        //    parameters.Add("City", interviewParams.City, DbType.String);
+        //    parameters.Add("State", interviewParams.State, DbType.String);
+        //    parameters.Add("Zip", interviewParams.Zip, DbType.Int32);
+
+
+        //    using (var connection = _context.CreateConnection())
+        //    {
+        //        var locations = await connection.QueryAsync<LocationResponse>(query, parameters);
+        //        return locations.ToList();
+        //    }
+        //}
+
         public async Task<InterviewResponse> GetInterviewById(int id)
         {
             var query = $"SELECT * FROM Interview WHERE Id = {id}";
@@ -48,10 +85,10 @@ namespace JobBoard.DAO
             }
         }
 
-        public async Task UpdateInterviewById(InterviewResponse updateRequest)
+        public async Task UpdateInterviewById(InterviewRequest updateRequest, int Id, InterviewResponse existingInterview)
         {
-            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionID}, CandidateId={updateRequest.CandidateID}," +
-                        $"StartTime='{updateRequest.StartTime}', EndTime='{updateRequest.EndTime}' WHERE Id='{updateRequest.Id}'";
+            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionID ?? existingInterview.PositionID}, CandidateId={updateRequest.CandidateID ?? existingInterview.CandidateID}," +
+                        $"StartTime='{updateRequest.StartTime ?? existingInterview.StartTime}', EndTime='{updateRequest.EndTime ?? existingInterview.EndTime}' WHERE Id='{Id}'";
 
             using (var connection = _context.CreateConnection())
             {
@@ -60,7 +97,7 @@ namespace JobBoard.DAO
 
         }
         
-        public async Task CreateInterview(InterviewResponse insertRequest)
+        public async Task CreateInterview(InterviewRequest insertRequest)
         {
             var query = $"INSERT INTO Interview (PositionID, CandidateID, StartTime, EndTime) VALUES ({insertRequest.PositionID}, {insertRequest.CandidateID}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
 

@@ -23,7 +23,7 @@ namespace JobBoard.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("interviews")]
+        [Route("interviews/search")]
         public async Task<IActionResult> GetInterviews()
         {
             try
@@ -71,7 +71,7 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("interviews")]
-        public async Task<IActionResult> CreateInterview([FromBody] InterviewResponse insertRequest)
+        public async Task<IActionResult> CreateInterview([FromBody] InterviewRequest insertRequest)
         {
             try
             {
@@ -84,23 +84,24 @@ namespace JobBoard.Controllers
             }
         }
         /// <summary>
-        /// Update Interview
+        /// Update Interview by ID
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="updateRequest"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("interviews")]
-        public async Task<IActionResult> UpdateInterviewById([FromBody] InterviewResponse updateRequest)
+        [Route("interviews/{id}")]
+        public async Task<IActionResult> UpdateInterviewById([FromRoute] int id, [FromBody] InterviewRequest updateRequest)
         {
             try
             {
-                var interview = await _interviewDao.GetInterviewById(updateRequest.Id);
+                var interview = await _interviewDao.GetInterviewById(id);
                 if (interview == null)
                 {
                     return StatusCode(404);
                 }
 
-                await _interviewDao.UpdateInterviewById(updateRequest);
+                await _interviewDao.UpdateInterviewById(updateRequest, id, interview);
                 return StatusCode(204);
             }
             catch (Exception e)
