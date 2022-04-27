@@ -16,50 +16,35 @@ namespace JobBoard.DAO
         {
             _context = context;
         }
-        //public async Task<IEnumerable<InterviewResponse>> GetInterviews()
-        //{
-        //    var query = $"SELECT * FROM Interview";
-        //    using (var connection = _context.CreateConnection())
-        //    {
-        //        var interviews = await connection.QueryAsync<InterviewResponse>(query);
-
-        //        return interviews.ToList();
-        //    }
-        //}
 
         public async Task<IEnumerable<InterviewResponse>> GetInterviews(InterviewRequest interviewParams)
         {
+            DateTime startDate = Convert.ToDateTime(interviewParams.StartTime);
+            DateTime endDate = Convert.ToDateTime(interviewParams.EndTime);
+
             var query = $"SELECT * FROM Interview WHERE 1= 1 ";
 
             if (!string.IsNullOrEmpty(interviewParams.PositionId.ToString()))
             {
-                query += "AND PositionId = @PositionId ";
+                query += $"AND PositionId = {interviewParams.PositionId} ";
             }
             if (!string.IsNullOrEmpty(interviewParams.CandidateId.ToString()))
             {
-                query += "AND CandidateId = @CandidateId ";
+                query += $"AND CandidateId = {interviewParams.CandidateId} ";
             }
             if (!string.IsNullOrEmpty(interviewParams.StartTime.ToString()))
-            {                
-                query += "AND StartTime = @StartTime ";
+            {
+                query += $"AND StartTime BETWEEN '{startDate.ToString("MM'-'dd'-'yyyy")}' and '{startDate.ToString("MM'-'dd'-'yyyy")} 23:59:59' ";
             }
             if (!string.IsNullOrEmpty(interviewParams.EndTime.ToString()))
             {
-                query += "AND EndTime = @EndTime ";
+                query += $"AND EndTime BETWEEN '{endDate.ToString("MM'-'dd'-'yyyy")}' and '{endDate.ToString("MM'-'dd'-'yyyy")} 23:59:59' ";
             }
-
-            string startdate = string.Format("[0:d}", interviewParams.StartTime);
-
-            var parameters = new DynamicParameters();
-            parameters.Add("PositionId", interviewParams.PositionId, DbType.Int32);
-            parameters.Add("CandidateId", interviewParams.CandidateId, DbType.Int32);
-            parameters.Add("StartTime", startdate, DbType.DateTime);
-            parameters.Add("EndTime", interviewParams.EndTime, DbType.DateTime);
 
 
             using (var connection = _context.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<InterviewResponse>(query, parameters);
+                var interviews = await connection.QueryAsync<InterviewResponse>(query);
                 return interviews.ToList();
             }
         }

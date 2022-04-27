@@ -4,7 +4,7 @@
         <name>JobBoard</name>
     </assembly>
     <members>
-        <member name="M:JobBoard.Controllers.CandidateController.GetCandidates(JobBoard.Models.Candidate)">
+        <member name="M:JobBoard.Controllers.CandidateController.GetCandidates(JobBoard.Models.CandidateRequest)">
             <summary>
             Filter Candidates
             </summary>
@@ -17,17 +17,18 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.CandidateController.CreateCandidate(JobBoard.Models.Candidate)">
+        <member name="M:JobBoard.Controllers.CandidateController.CreateCandidate(JobBoard.Models.CandidateRequest)">
             <summary>
             Post new Candidate
             </summary>
             <param name="insertRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.CandidateController.UpdateCandidateById(JobBoard.Models.Candidate)">
+        <member name="M:JobBoard.Controllers.CandidateController.UpdateCandidateById(System.Int32,JobBoard.Models.CandidateRequest)">
             <summary>
-            Update Candidate
+            Update Candidate By ID
             </summary>
+            <param name="id"></param>
             <param name="updateRequest"></param>
             <returns></returns>
         </member>
@@ -45,7 +46,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.InterviewController.GetInterviews">
+        <member name="M:JobBoard.Controllers.InterviewController.GetInterviews(JobBoard.Models.InterviewRequest)">
             <summary>
             Get all Interviews
             </summary>
@@ -58,17 +59,18 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.InterviewController.CreateInterview(JobBoard.Models.Interview)">
+        <member name="M:JobBoard.Controllers.InterviewController.CreateInterview(JobBoard.Models.InterviewRequest)">
             <summary>
             Post new Interview
             </summary>
             <param name="insertRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.InterviewController.UpdateInterviewById(JobBoard.Models.Interview)">
+        <member name="M:JobBoard.Controllers.InterviewController.UpdateInterviewById(System.Int32,JobBoard.Models.InterviewRequest)">
             <summary>
-            Update Interview
+            Update Interview by ID
             </summary>
+            <param name="id"></param>
             <param name="updateRequest"></param>
             <returns></returns>
         </member>
@@ -107,7 +109,7 @@
             <param name="date"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.LocationController.GetLocations">
+        <member name="M:JobBoard.Controllers.LocationController.GetLocations(JobBoard.Models.LocationRequest)">
             <summary>
             Get all Locations
             </summary>
@@ -120,17 +122,18 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.LocationController.CreateLocation(JobBoard.Models.Location)">
+        <member name="M:JobBoard.Controllers.LocationController.CreateLocation(JobBoard.Models.LocationRequest)">
             <summary>
             Post new Location
             </summary>
             <param name="insertRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.LocationController.UpdateLocationById(JobBoard.Models.Location)">
+        <member name="M:JobBoard.Controllers.LocationController.UpdateLocationById(System.Int32,JobBoard.Models.LocationRequest)">
             <summary>
-            Update Location
+            Update Location by ID
             </summary>
+            <param name="id"></param>
             <param name="updateRequest"></param>
             <returns></returns>
         </member>
@@ -141,7 +144,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.PositionController.GetPositions">
+        <member name="M:JobBoard.Controllers.PositionController.GetPositions(JobBoard.Models.PositionRequest)">
             <summary>
             Get all Positions
             </summary>
@@ -154,17 +157,18 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.PositionController.CreatePosition(JobBoard.Models.Position)">
+        <member name="M:JobBoard.Controllers.PositionController.CreatePosition(JobBoard.Models.PositionRequest)">
             <summary>
             Post new Position
             </summary>
             <param name="insertRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:JobBoard.Controllers.PositionController.UpdatePositionById(JobBoard.Models.Position)">
+        <member name="M:JobBoard.Controllers.PositionController.UpdatePositionById(System.Int32,JobBoard.Models.PositionRequest)">
             <summary>
-            Update Position
+            Update Position by ID
             </summary>
+            <param name="id"></param>
             <param name="updateRequest"></param>
             <returns></returns>
         </member>
