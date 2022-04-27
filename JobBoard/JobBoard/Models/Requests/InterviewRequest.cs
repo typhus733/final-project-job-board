@@ -10,10 +10,10 @@ namespace JobBoard.Models
     public class InterviewRequest
     {        
         [Display(Name = "Position")]
-        public int? PositionID { get; set; }
+        public int? PositionId { get; set; }
                 
         [Display(Name = "Candidate")]
-        public int? CandidateID { get; set; } 
+        public int? CandidateId { get; set; } 
                 
         [Display(Name = "Start Time")]
         public virtual DateTime? StartTime { get; set; }

@@ -16,7 +16,7 @@ namespace JobBoard.DAO
         {
             _context = context;
         }
-
+        // 
         public async Task<IEnumerable<CandidateResponse>> GetCandidates(CandidateRequest querycandidate)
         {
             var query = $"SELECT * FROM Candidate WHERE 1= 1 ";

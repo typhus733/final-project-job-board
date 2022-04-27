@@ -16,53 +16,53 @@ namespace JobBoard.DAO
         {
             _context = context;
         }
-        public async Task<IEnumerable<InterviewResponse>> GetInterviews()
+        //public async Task<IEnumerable<InterviewResponse>> GetInterviews()
+        //{
+        //    var query = $"SELECT * FROM Interview";
+        //    using (var connection = _context.CreateConnection())
+        //    {
+        //        var interviews = await connection.QueryAsync<InterviewResponse>(query);
+
+        //        return interviews.ToList();
+        //    }
+        //}
+
+        public async Task<IEnumerable<InterviewResponse>> GetInterviews(InterviewRequest interviewParams)
         {
-            var query = $"SELECT * FROM Interview";
+            var query = $"SELECT * FROM Interview WHERE 1= 1 ";
+
+            if (!string.IsNullOrEmpty(interviewParams.PositionId.ToString()))
+            {
+                query += "AND PositionId = @PositionId ";
+            }
+            if (!string.IsNullOrEmpty(interviewParams.CandidateId.ToString()))
+            {
+                query += "AND CandidateId = @CandidateId ";
+            }
+            if (!string.IsNullOrEmpty(interviewParams.StartTime.ToString()))
+            {                
+                query += "AND StartTime = @StartTime ";
+            }
+            if (!string.IsNullOrEmpty(interviewParams.EndTime.ToString()))
+            {
+                query += "AND EndTime = @EndTime ";
+            }
+
+            string startdate = string.Format("[0:d}", interviewParams.StartTime);
+
+            var parameters = new DynamicParameters();
+            parameters.Add("PositionId", interviewParams.PositionId, DbType.Int32);
+            parameters.Add("CandidateId", interviewParams.CandidateId, DbType.Int32);
+            parameters.Add("StartTime", startdate, DbType.DateTime);
+            parameters.Add("EndTime", interviewParams.EndTime, DbType.DateTime);
+
+
             using (var connection = _context.CreateConnection())
             {
-                var interviews = await connection.QueryAsync<InterviewResponse>(query);
-
+                var interviews = await connection.QueryAsync<InterviewResponse>(query, parameters);
                 return interviews.ToList();
             }
         }
-
-        //public async Task<IEnumerable<InterviewResponse>> GetInterviews(InterviewRequest interviewParams)
-        //{
-        //    var query = $"SELECT * FROM Location WHERE 1= 1 ";
-
-        //    if (!string.IsNullOrEmpty(interviewParams.PositionID.ToString))
-        //    {
-        //        query += "AND PositionId = @PositionId ";
-        //    }
-        //    if (!string.IsNullOrEmpty(interviewParams.CandidateID.ToString))
-        //    {
-        //        query += "AND CandidateId = @CandidateId ";
-        //    }
-        //    if (!string.IsNullOrEmpty(interviewParams.StartTime))
-        //    {
-        //        query += "AND StartTime = @StartTime ";
-        //    }
-        //    if (!string.IsNullOrEmpty(interviewParams.EndTime))
-        //    {
-        //        query += "AND EndTime = @EndTime ";
-        //    }
-
-
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("Name", interviewParams.Name, DbType.String);
-        //    parameters.Add("Street", interviewParams.Street, DbType.String);
-        //    parameters.Add("City", interviewParams.City, DbType.String);
-        //    parameters.Add("State", interviewParams.State, DbType.String);
-        //    parameters.Add("Zip", interviewParams.Zip, DbType.Int32);
-
-
-        //    using (var connection = _context.CreateConnection())
-        //    {
-        //        var locations = await connection.QueryAsync<LocationResponse>(query, parameters);
-        //        return locations.ToList();
-        //    }
-        //}
 
         public async Task<InterviewResponse> GetInterviewById(int id)
         {
@@ -87,7 +87,7 @@ namespace JobBoard.DAO
 
         public async Task UpdateInterviewById(InterviewRequest updateRequest, int Id, InterviewResponse existingInterview)
         {
-            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionID ?? existingInterview.PositionID}, CandidateId={updateRequest.CandidateID ?? existingInterview.CandidateID}," +
+            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionId ?? existingInterview.PositionId}, CandidateId={updateRequest.CandidateId ?? existingInterview.CandidateId}," +
                         $"StartTime='{updateRequest.StartTime ?? existingInterview.StartTime}', EndTime='{updateRequest.EndTime ?? existingInterview.EndTime}' WHERE Id='{Id}'";
 
             using (var connection = _context.CreateConnection())
@@ -99,7 +99,7 @@ namespace JobBoard.DAO
         
         public async Task CreateInterview(InterviewRequest insertRequest)
         {
-            var query = $"INSERT INTO Interview (PositionID, CandidateID, StartTime, EndTime) VALUES ({insertRequest.PositionID}, {insertRequest.CandidateID}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
+            var query = $"INSERT INTO Interview (PositionID, CandidateID, StartTime, EndTime) VALUES ({insertRequest.PositionId}, {insertRequest.CandidateId}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
 
             using (var connection = _context.CreateConnection())
             {

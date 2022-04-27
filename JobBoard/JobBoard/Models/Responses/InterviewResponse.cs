@@ -16,11 +16,11 @@ namespace JobBoard.Models
 
         [Required]
         [Display(Name = "Position")]
-        public int PositionID { get; set; }
+        public int PositionId { get; set; }
 
         [Required]
         [Display(Name = "Candidate")]
-        public int CandidateID { get; set; } 
+        public int CandidateId { get; set; } 
         
         [Required]
         [Display(Name = "Start Time")]

@@ -24,11 +24,11 @@ namespace JobBoard.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("interviews/search")]
-        public async Task<IActionResult> GetInterviews()
+        public async Task<IActionResult> GetInterviews([FromQuery] InterviewRequest interviewParams)
         {
             try
             {
-                var interviews = await _interviewDao.GetInterviews();
+                var interviews = await _interviewDao.GetInterviews(interviewParams);
                 if (interviews.Count() == 0)
                 {
                     return StatusCode(404);
