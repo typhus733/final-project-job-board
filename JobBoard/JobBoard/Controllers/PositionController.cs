@@ -20,7 +20,7 @@ namespace JobBoard.Controllers
         }
 
         /// <summary>
-        /// Get all Positions
+        /// Get Position by Filter
         /// </summary>
         /// <returns></returns>
         [HttpGet]

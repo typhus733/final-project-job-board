@@ -19,7 +19,7 @@ namespace JobBoard.Controllers
         }
 
         /// <summary>
-        /// Filter Candidates
+        /// Get Candidate by Filter
         /// </summary>
         /// <returns></returns>
 

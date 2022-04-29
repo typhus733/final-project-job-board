@@ -19,7 +19,7 @@ namespace JobBoard.Controllers
             _interviewDao = interviewDao;
         }
         /// <summary>
-        /// Get all Interviews
+        /// Get Interviews by Filter
         /// </summary>
         /// <returns></returns>
         [HttpGet]

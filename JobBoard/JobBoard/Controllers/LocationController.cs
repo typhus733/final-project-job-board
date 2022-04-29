@@ -20,7 +20,7 @@ namespace JobBoard.Controllers
             _locationDao = locationDao;
         }
         /// <summary>
-        /// Get all Locations
+        /// Get Location by Filter
         /// </summary>
         /// <returns></returns>
         [HttpGet]
