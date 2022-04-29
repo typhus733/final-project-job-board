@@ -24,11 +24,11 @@ namespace JobBoard.Models
         
         [Required]
         [Display(Name = "Start Time")]
-        public virtual DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [Required]
         [Display(Name = "End Time")]
-        public virtual DateTime EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
     }
 }

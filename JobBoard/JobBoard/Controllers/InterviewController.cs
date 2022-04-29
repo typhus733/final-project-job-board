@@ -18,8 +18,9 @@ namespace JobBoard.Controllers
         {
             _interviewDao = interviewDao;
         }
+
         /// <summary>
-        /// Get Interviews by Filter
+        /// Get Interview by Filter
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -40,6 +41,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Get Interviews by Id
         /// </summary>
@@ -76,13 +78,14 @@ namespace JobBoard.Controllers
             try
             {
                 await _interviewDao.CreateInterview(insertRequest);
-                return StatusCode(204);
+                return StatusCode(201);
             }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Update Interview by ID
         /// </summary>
@@ -109,6 +112,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Delete Interview
         /// </summary>
@@ -134,6 +138,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Get Interview by CandidateId
         /// </summary>
@@ -157,6 +162,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Get Interview by PositionId
         /// </summary>
@@ -180,6 +186,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Get Interview by LocationId
         /// </summary>
@@ -203,6 +210,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Get Interview by Date
         /// </summary>

@@ -16,10 +16,10 @@ namespace JobBoard.Models
         public int? CandidateId { get; set; } 
                 
         [Display(Name = "Start Time")]
-        public virtual DateTime? StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         [Display(Name = "End Time")]
-        public virtual DateTime? EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
 
     }
 }

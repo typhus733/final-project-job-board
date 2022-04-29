@@ -19,6 +19,7 @@ namespace JobBoard.Controllers
         {
             _locationDao = locationDao;
         }
+
         /// <summary>
         /// Get Location by Filter
         /// </summary>
@@ -41,6 +42,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Get Location by Id
         /// </summary>
@@ -77,13 +79,14 @@ namespace JobBoard.Controllers
             try
             {
                 await _locationDao.CreateLocation(insertRequest);
-                return StatusCode(204);
+                return StatusCode(201);
             }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Update Location by ID
         /// </summary>
@@ -110,6 +113,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Delete Location 
         /// </summary>

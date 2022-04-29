@@ -72,8 +72,10 @@ namespace JobBoard.DAO
 
         public async Task UpdateInterviewById(InterviewRequest updateRequest, int Id, InterviewResponse existingInterview)
         {
-            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionId ?? existingInterview.PositionId}, CandidateId={updateRequest.CandidateId ?? existingInterview.CandidateId}," +
-                        $"StartTime='{updateRequest.StartTime ?? existingInterview.StartTime}', EndTime='{updateRequest.EndTime ?? existingInterview.EndTime}' WHERE Id='{Id}'";
+            var query = $"UPDATE Interview SET PositionId= {updateRequest.PositionId ?? existingInterview.PositionId}, " +
+                        $"CandidateId={updateRequest.CandidateId ?? existingInterview.CandidateId}, " +
+                        $"StartTime='{updateRequest.StartTime ?? existingInterview.StartTime}', " +
+                        $"EndTime='{updateRequest.EndTime ?? existingInterview.EndTime}' WHERE Id='{Id}'";
 
             using (var connection = _context.CreateConnection())
             {
@@ -84,7 +86,8 @@ namespace JobBoard.DAO
         
         public async Task CreateInterview(InterviewRequest insertRequest)
         {
-            var query = $"INSERT INTO Interview (PositionID, CandidateID, StartTime, EndTime) VALUES ({insertRequest.PositionId}, {insertRequest.CandidateId}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
+            var query = $"INSERT INTO Interview (PositionID, CandidateID, StartTime, EndTime) VALUES " +
+                        $"({insertRequest.PositionId}, {insertRequest.CandidateId}, '{insertRequest.StartTime}', '{insertRequest.EndTime}')";
 
             using (var connection = _context.CreateConnection())
             {
@@ -117,8 +120,8 @@ namespace JobBoard.DAO
         public async Task<IEnumerable<InterviewResponse>> GetInterviewsbyLocationId(int id)
         {
             var query = $"SELECT Interview.Id, Interview.PositionId, Interview.CandidateId, Interview.StartTime, Interview.EndTime, Position.LocationId " +
-            $"From Interview Join Position ON Interview.PositionId = Position.Id Join Location on Position.LocationId = Location.Id " +
-            $"Where Location.Id = { id}";
+                        $"From Interview Join Position ON Interview.PositionId = Position.Id Join Location on Position.LocationId = Location.Id " +
+                        $"Where Location.Id = {id}";
 
             using (var connection = _context.CreateConnection())
             {

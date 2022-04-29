@@ -78,7 +78,7 @@ namespace JobBoard.Controllers
             try
             {
                 await _positionDao.CreatePosition(insertRequest);
-                return StatusCode(204);
+                return StatusCode(201);
             }
             catch (Exception e)
             {
@@ -138,6 +138,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Get Positions by LocationId
         /// </summary>

@@ -78,13 +78,14 @@ namespace JobBoard.Controllers
             try
             {
                 await _candidateDao.CreateCandidate(insertRequest);
-                return StatusCode(204);
+                return StatusCode(201);
             }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Update Candidate By ID
         /// </summary>
@@ -111,6 +112,7 @@ namespace JobBoard.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
         /// <summary>
         /// Delete Candidate
         /// </summary>
