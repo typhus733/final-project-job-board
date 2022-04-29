@@ -89,7 +89,7 @@ namespace JobBoard.Controllers
         /// <param name="id"></param>
         /// <param name="updateRequest"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPatch]
         [Route("interviews/{id}")]
         public async Task<IActionResult> UpdateInterviewById([FromRoute] int id, [FromBody] InterviewRequest updateRequest)
         {

@@ -20,8 +20,7 @@ namespace JobBoard.DAO
         public async Task<IEnumerable<CandidateResponse>> GetCandidates(CandidateRequest querycandidate)
         {
             var query = $"SELECT * FROM Candidate WHERE 1= 1 ";
-
-           
+                       
             if (!string.IsNullOrEmpty(querycandidate.First_Name))
             {
                 query += "AND First_Name = @First_Name ";
