@@ -6,7 +6,7 @@
     <members>
         <member name="M:JobBoard.Controllers.CandidateController.GetCandidates(JobBoard.Models.CandidateRequest)">
             <summary>
-            Filter Candidates
+            Get Candidate by Filter
             </summary>
             <returns></returns>
         </member>
@@ -41,14 +41,14 @@
         </member>
         <member name="M:JobBoard.Controllers.CandidateController.GetPositionsByCandidateId(System.Int32)">
             <summary>
-            Get Candidates by PositionId
+            Get Positions by CandidateId
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:JobBoard.Controllers.InterviewController.GetInterviews(JobBoard.Models.InterviewRequest)">
             <summary>
-            Get all Interviews
+            Get Interview by Filter
             </summary>
             <returns></returns>
         </member>
@@ -111,7 +111,7 @@
         </member>
         <member name="M:JobBoard.Controllers.LocationController.GetLocations(JobBoard.Models.LocationRequest)">
             <summary>
-            Get all Locations
+            Get Location by Filter
             </summary>
             <returns></returns>
         </member>
@@ -146,7 +146,7 @@
         </member>
         <member name="M:JobBoard.Controllers.PositionController.GetPositions(JobBoard.Models.PositionRequest)">
             <summary>
-            Get all Positions
+            Get Position by Filter
             </summary>
             <returns></returns>
         </member>

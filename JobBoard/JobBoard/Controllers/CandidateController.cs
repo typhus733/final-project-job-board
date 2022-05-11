@@ -140,12 +140,12 @@ namespace JobBoard.Controllers
         }
 
         /// <summary>
-        /// Get Candidates by PositionId
+        /// Get Positions by CandidateId
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("candidates/positions/{id}")]
+        [Route("candidates/{id}/positions")]
         public async Task<IActionResult> GetPositionsByCandidateId([FromRoute] int id)
         {
             try

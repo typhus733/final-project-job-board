@@ -104,7 +104,7 @@ namespace JobBoard.DAO
 
         public async Task<IEnumerable<PositionResponse>> GetPositionsByCandidateId(int id)
         {
-            var query = $"Select Interview.Id, PositionId, Position.Title, CandidateId, Candidate.First_Name, " +
+            var query = $"Select Position.Id, PositionId, Position.Title, CandidateId, Candidate.First_Name, " +
                         $"Candidate.Last_Name, Position.Department, Position.LocationId, Position.isFullTime " +
                         $"from Interview JOIN Position ON Interview.PositionId = Position.Id " +
                         $"JOIN Candidate ON Interview.CandidateId = Candidate.Id WHERE Candidate.Id = {id}";
