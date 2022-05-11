@@ -140,7 +140,7 @@ namespace JobBoard.Controllers
         }
 
         /// <summary>
-        /// Get Positions by CandidateId
+        /// Get Position by CandidateId
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
